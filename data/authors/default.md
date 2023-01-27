@@ -2,7 +2,7 @@
 name: Luis Rivases
 avatar: /static/images/avatar.png
 occupation: Professor of Atmospheric Science
-company: Forrest Media Group
+company: EKO Red
 email: luisrivases@metaintel.tk
 twitter: https://twitter.com/Twitter
 linkedin: https://www.linkedin.com

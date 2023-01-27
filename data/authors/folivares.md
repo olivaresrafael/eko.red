@@ -2,7 +2,7 @@
 name: Francisco Olivares
 avatar: /static/images/avatar/francisco.jpeg
 occupation: Periodista de invertigación
-company: Forrest Media Group
+company: EKO Red
 email: folivares@metaintel.tk
 twitter: https://twitter.com/folivares10
 ---

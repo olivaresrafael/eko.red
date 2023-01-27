@@ -22,17 +22,10 @@ const LayoutWrapper = ({ children }) => {
                   <Image
                     src="/static/images/logo.png"
                     alt="Picture of the author"
-                    width={150}
+                    width={300}
                     height={100}
                   />
                 </div>
-                {typeof siteMetadata.headerTitle === 'string' ? (
-                  <div className="hidden h-8 font-serif text-4xl font-medium sm:block">
-                    {siteMetadata.headerTitle}
-                  </div>
-                ) : (
-                  siteMetadata.headerTitle
-                )}
               </div>
             </Link>
           </div>

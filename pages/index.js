@@ -99,7 +99,7 @@ function Li({ slug, date, title, summary, tags, image }) {
   return (
     <li key={slug} className="py-12">
       <article>
-        <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+        <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-start xl:space-y-0">
           <div className="mx-3">
             <Link href={`/blog/${slug}`} aria-label={`Link to ${title}`}>
               <Image

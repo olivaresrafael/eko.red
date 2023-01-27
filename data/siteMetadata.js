@@ -1,7 +1,7 @@
 const siteMetadata = {
-  title: 'Meta Intel News - The latest news from the Meta Intel community',
-  author: 'Forrest Media Group',
-  headerTitle: 'Meta Intel',
+  title: 'EKO Red News - The latest news from the EKO Red community',
+  author: 'EKO Red',
+  headerTitle: 'EKO Red',
   description: [
     'Inteligencia y Gobierno Corporativo',
     'Ciberseguridad y Crimen Organizado',

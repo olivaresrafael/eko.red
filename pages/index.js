@@ -23,12 +23,12 @@ export default function Home({ posts }) {
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="grid grid-cols-3 justify-items-center gap-3">
+        <div className="grid grid-cols-4 justify-items-center">
           {siteMetadata.description.map((line) => (
             <a
               key={line}
               href="#"
-              className="w-64 p-1 text-center text-xl font-semibold text-gray-900 dark:text-gray-100 sm:p-4"
+              className="w-64 p-1 text-center text-xl font-semibold text-gray-900 hover:text-primary-600 dark:text-gray-100 dark:hover:text-primary-600  sm:p-4"
             >
               {line}
             </a>

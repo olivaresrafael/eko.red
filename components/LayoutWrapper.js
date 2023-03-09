@@ -6,21 +6,23 @@ import SectionContainer from './SectionContainer'
 import Footer from './Footer'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useTheme } from 'next-themes'
+import { useSession, signOut } from 'next-auth/react'
 
 const LayoutWrapper = ({ children }) => {
   const { data: session } = useSession()
+  const { theme, resolvedTheme } = useTheme()
 
   return (
     <SectionContainer>
       <div className="flex h-screen flex-col justify-between">
-        <header className="flex items-center justify-between py-10">
+        <header className="flex items-center justify-between pt-5">
           <div>
             <Link href="/" aria-label={siteMetadata.headerTitle}>
               <div className="flex items-center justify-between">
                 <div className="mr-3">
                   <Image
-                    src="/static/images/logo.png"
+                    src={`/static/images/logo_${resolvedTheme}.svg`}
                     alt="Picture of the author"
                     width={300}
                     height={100}

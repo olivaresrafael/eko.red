@@ -12,7 +12,7 @@ const siteMetadata = {
   socialBanner: '/static/images/twitter-card.png',
   email: 'info@eko.red',
   github: 'https://github.com/ekored',
-  twitter: 'https://twitter.com/ekored',
+  twitter: 'https://twitter.com/ekopuntored',
   facebook: 'https://facebook.com/ekored',
   youtube: 'https://youtube.com/ekored',
   linkedin: 'https://www.linkedin.com/ekored',

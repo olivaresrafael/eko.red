@@ -8,7 +8,7 @@ export async function getStaticProps() {
   const Luis = await getFileBySlug('authors', ['default'])
   const Francisco = await getFileBySlug('authors', ['folivares'])
   const Rafael = await getFileBySlug('authors', ['olivaresrafael'])
-  return { props: { Luis, Francisco, Rafael } }
+  return { props: { Francisco, Rafael } }
 }
 
 export default function About({ Luis, Francisco, Rafael }) {
@@ -20,13 +20,6 @@ export default function About({ Luis, Francisco, Rafael }) {
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             About
           </h1>
-        </div>
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <MDXLayoutRenderer
-            layout={Luis.frontMatter.layout || DEFAULT_LAYOUT}
-            mdxSource={Luis.mdxSource}
-            frontMatter={Luis.frontMatter}
-          />
         </div>
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <MDXLayoutRenderer

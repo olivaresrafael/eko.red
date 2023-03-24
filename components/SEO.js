@@ -7,6 +7,10 @@ const CommonSEO = ({ title, description, ogType, ogImage, twImage, canonicalUrl 
   return (
     <Head>
       <title>{title}</title>
+      <meta
+        httpEquiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; script-src 'self' https://somedomain.com/ 'unsafe-inline' 'unsafe-eval';  media-src *"
+      />
       <meta name="robots" content="follow, index" />
       <meta name="description" content={description} />
       <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />

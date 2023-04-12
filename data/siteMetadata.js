@@ -1,17 +1,17 @@
 const siteMetadata = {
-  title: 'EKO Red News - The latest news from the EKO Red community',
+  title: 'EKO Red News - Economía, política y mundo digital',
   author: 'EKO Red',
   headerTitle: 'EKO Red',
   description: ['MUNDO', 'CULTURA', 'INNOVACIÓN', 'EMPRENDIMIENTO'],
   language: 'en-us',
-  theme: 'system', // system, dark or light
+  theme: 'dark', // system, dark or light
   siteUrl: 'https://eko.red',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteRepo: 'https://github.com/rafaolivares/eko.red',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter-card.png',
   email: 'info@eko.red',
-  github: 'https://github.com/ekored',
+  github: 'https://github.com/rafaolivares',
   twitter: 'https://twitter.com/ekopuntored',
   facebook: 'https://facebook.com/ekored',
   youtube: 'https://youtube.com/ekored',

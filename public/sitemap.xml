@@ -13,6 +13,10 @@
   </url>
 
   <url>
+    <loc>https://eko.red/login</loc>
+  </url>
+
+  <url>
     <loc>https://eko.red/tags</loc>
   </url>
 
@@ -20,10 +24,6 @@
     <loc
       >https://eko.red/blog/corrupcion-y-paramilitarismo-factores-que-han-acompanado-al-chavismo</loc
     >
-  </url>
-
-  <url>
-    <loc>https://eko.red/blog/crece-el-negocio-de-la-venta-de-datos</loc>
   </url>
 
   <url>
@@ -37,19 +37,13 @@
   </url>
 
   <url>
-    <loc>https://eko.red/blog/impacto-de-los-ciberataques-en-latinoamerica</loc>
-  </url>
-
-  <url>
     <loc>https://eko.red/blog/john-doe-advierte-que-puin-es-hoy-para-stados-unidos-una-amenaza</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/blog/la-economia-negra-en-latinoamerica</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/blog/ransom</loc>
+    <loc
+      >https://eko.red/blog/latinoamerica-se-ha-convertido-en-objetivo-para-robo-de-informacion-de-ciberbandas</loc
+    >
   </url>
 
   <url>
@@ -59,17 +53,9 @@
   </url>
 
   <url>
-    <loc>https://eko.red/blog/tradicion-de-espionaje-en-venezuela</loc>
-  </url>
-
-  <url>
     <loc
       >https://eko.red/blog/un-pirata-venezolano-informatico-fue-acusado-por-la-fiscalia-de-nueva-york</loc
     >
-  </url>
-
-  <url>
-    <loc>https://eko.red/blog/nested-route/criminales-globallizados</loc>
   </url>
 
   <url>
@@ -89,11 +75,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/datos</loc>
+    <loc>https://eko.red/tags/drogas</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/drogas</loc>
+    <loc>https://eko.red/tags/datos</loc>
   </url>
 
   <url>
@@ -129,11 +115,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/rusia</loc>
+    <loc>https://eko.red/tags/ransomware</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/ransomware</loc>
+    <loc>https://eko.red/tags/rusia</loc>
   </url>
 
   <url>

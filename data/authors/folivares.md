@@ -2,7 +2,6 @@
 name: Francisco Olivares
 avatar: /static/images/avatar/francisco.jpeg
 occupation: Editor de EKO.RED
-company: EKO Red
 email: folivares@eko.red
 twitter: https://twitter.com/folivares10
 ---

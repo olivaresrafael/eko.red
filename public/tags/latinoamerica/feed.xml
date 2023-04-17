@@ -1,23 +1,63 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>EKO Red News - The latest news from the EKO Red community</title>
+      <title>EKO Red News - Economía, política y mundo digital</title>
       <link>https://eko.red/blog</link>
-      <description>MUNDO,CULTURA,INNOVACIÓN,EMPRENDIMIENTO</description>
+      <description>MUNDO,CULTURA,INNOVACIÓN,CRIMEN</description>
       <language>en-us</language>
       <managingEditor>info@eko.red (EKO Red)</managingEditor>
       <webMaster>info@eko.red (EKO Red)</webMaster>
-      <lastBuildDate>Wed, 27 Jul 2022 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Tue, 11 Apr 2023 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://eko.red/tags/latinoamerica/feed.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://eko.red/blog/venezuela-es-uno-de-los-pases-con-mayor-circulacin-de-dinero-ilegal-y-corrupcin</guid>
+    <title>Venezuela es uno de los países con mayor circulación de dinero ilegal y corrupción</title>
+    <link>https://eko.red/blog/venezuela-es-uno-de-los-pases-con-mayor-circulacin-de-dinero-ilegal-y-corrupcin</link>
+    <description>Venezuela es uno de los países en donde más se mueve la economía ilegal o negra de Latinoamérica y el mundo. Algunos analistas la ubican en 25% del PIB, muy por encima del promedio mundial que, según el FMI y el FEM, oscila entre 8 y 15% aproximadamente.</description>
+    <pubDate>Tue, 11 Apr 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>latinoamerica</category><category>venezuela</category><category>economia</category><category>corrupcion</category>
+  </item>
+
   <item>
     <guid>https://eko.red/blog/gobiernos-de-latinoamerica-estuvieron-involucrados-con-hacker-team</guid>
     <title>Gobiernos de América Latina estuvieron involucrados con “Hacking Team” la cuestionada empresa de espionaje</title>
     <link>https://eko.red/blog/gobiernos-de-latinoamerica-estuvieron-involucrados-con-hacker-team</link>
     <description>Gobiernos de América Latina estuvieron involucrados con “Hacking Team” la cuestionada empresa de espionaje</description>
-    <pubDate>Wed, 27 Jul 2022 00:00:00 GMT</pubDate>
+    <pubDate>Sun, 09 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
     <category>crimen</category><category>ciberseguridad</category><category>latinoamerica</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/latinoamerica-se-ha-convertido-en-objetivo-para-robo-de-informacion-de-ciberbandas</guid>
+    <title>Latinoamérica se ha convertido en objetivo para robo de información de ciberbandas</title>
+    <link>https://eko.red/blog/latinoamerica-se-ha-convertido-en-objetivo-para-robo-de-informacion-de-ciberbandas</link>
+    <description>Millones de dólares han tenido que pagar gobiernos y empresas por estos hackers para recuperar sus sistemas informáticos o evitar la divulgación de información privada o estratégica </description>
+    <pubDate>Sat, 08 Apr 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>cibercrimen</category><category>ransomware</category><category>latinoamerica</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/un-pirata-venezolano-informatico-fue-acusado-por-la-fiscalia-de-nueva-york</guid>
+    <title>Un pirata venezolano informático fue acusado por la Fiscalía del Distrito de Nueva York</title>
+    <link>https://eko.red/blog/un-pirata-venezolano-informatico-fue-acusado-por-la-fiscalia-de-nueva-york</link>
+    <description>El ciberpirata es un médico venezolano a quien el FBI le seguía los pasos desde hace unos años y quien diseñó un ransomware malicioso para robar información, patrocinado por Irán</description>
+    <pubDate>Fri, 07 Apr 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>cibercrimen</category><category>ransomware</category><category>latinoamerica</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/el-espionaje-y-las-falsas-noticias-en-la-politica-lationamercana</guid>
+    <title>El espionaje y falsas noticias en la política Latinoamericana</title>
+    <link>https://eko.red/blog/el-espionaje-y-las-falsas-noticias-en-la-politica-lationamercana</link>
+    <description>El espionaje, la contra información, informaciones falsas, suplantación de identidad, robo de información, a través de equipos de hackers especializados en esa materia son contratados por factores del poder para producir campañas sucias contra figuras políticas, periodistas, líderes de opinión o líderes empresariales</description>
+    <pubDate>Thu, 06 Apr 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>latinoamerica</category><category>crimen</category><category>datos</category><category>mundo</category>
   </item>
 
     </channel>

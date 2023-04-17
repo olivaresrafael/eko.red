@@ -67,7 +67,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/corrupción</loc>
+    <loc>https://eko.red/tags/datos</loc>
   </url>
 
   <url>
@@ -75,19 +75,15 @@
   </url>
 
   <url>
+    <loc>https://eko.red/tags/corrupcion</loc>
+  </url>
+
+  <url>
     <loc>https://eko.red/tags/drogas</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/datos</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/economía</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/espionaje</loc>
+    <loc>https://eko.red/tags/economia</loc>
   </url>
 
   <url>
@@ -103,15 +99,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/latinoamérca</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/latinoamérica</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/mundo</loc>
+    <loc>https://eko.red/tags/militares</loc>
   </url>
 
   <url>
@@ -124,5 +112,9 @@
 
   <url>
     <loc>https://eko.red/tags/venezuela</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/mundo</loc>
   </url>
 </urlset>

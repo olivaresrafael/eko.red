@@ -1,13 +1,13 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>EKO Red News - The latest news from the EKO Red community</title>
+      <title>EKO Red News - Economía, política y mundo digital</title>
       <link>https://eko.red/blog</link>
-      <description>MUNDO,CULTURA,INNOVACIÓN,EMPRENDIMIENTO</description>
+      <description>MUNDO,CULTURA,INNOVACIÓN,CRIMEN</description>
       <language>en-us</language>
       <managingEditor>info@eko.red (EKO Red)</managingEditor>
       <webMaster>info@eko.red (EKO Red)</webMaster>
-      <lastBuildDate>Thu, 28 Jul 2022 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Mon, 10 Apr 2023 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://eko.red/tags/crimen/feed.xml" rel="self" type="application/rss+xml"/>
       
   <item>
@@ -15,7 +15,7 @@
     <title>“John Doe” advierte que Putin es hoy para Estados Unidos una amenaza mayor de lo que fue Hitler</title>
     <link>https://eko.red/blog/john-doe-advierte-que-puin-es-hoy-para-stados-unidos-una-amenaza</link>
     <description>Las sociedades offshore que financian al ejército ruso son las que permiten que se mate a civiles inocentes en Ucrania, dice el misterioso personaje anónimo que filtró los archivos del bufete Mossack Fonseca</description>
-    <pubDate>Thu, 28 Jul 2022 00:00:00 GMT</pubDate>
+    <pubDate>Mon, 10 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
     <category>datos</category><category>crimen</category><category>finanzas</category>
   </item>
@@ -25,7 +25,7 @@
     <title>Gobiernos de América Latina estuvieron involucrados con “Hacking Team” la cuestionada empresa de espionaje</title>
     <link>https://eko.red/blog/gobiernos-de-latinoamerica-estuvieron-involucrados-con-hacker-team</link>
     <description>Gobiernos de América Latina estuvieron involucrados con “Hacking Team” la cuestionada empresa de espionaje</description>
-    <pubDate>Wed, 27 Jul 2022 00:00:00 GMT</pubDate>
+    <pubDate>Sun, 09 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
     <category>crimen</category><category>ciberseguridad</category><category>latinoamerica</category>
   </item>
@@ -35,9 +35,9 @@
     <title>El espionaje y falsas noticias en la política Latinoamericana</title>
     <link>https://eko.red/blog/el-espionaje-y-las-falsas-noticias-en-la-politica-lationamercana</link>
     <description>El espionaje, la contra información, informaciones falsas, suplantación de identidad, robo de información, a través de equipos de hackers especializados en esa materia son contratados por factores del poder para producir campañas sucias contra figuras políticas, periodistas, líderes de opinión o líderes empresariales</description>
-    <pubDate>Fri, 22 Jul 2022 00:00:00 GMT</pubDate>
+    <pubDate>Thu, 06 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>latinoamérica</category><category>crimen</category><category>datos</category>
+    <category>latinoamerica</category><category>crimen</category><category>datos</category><category>mundo</category>
   </item>
 
     </channel>

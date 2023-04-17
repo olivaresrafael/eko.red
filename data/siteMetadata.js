@@ -2,7 +2,7 @@ const siteMetadata = {
   title: 'EKO Red News - Economía, política y mundo digital',
   author: 'EKO Red',
   headerTitle: 'EKO Red',
-  description: ['MUNDO', 'CULTURA', 'INNOVACIÓN', 'EMPRENDIMIENTO'],
+  description: ['MUNDO', 'CULTURA', 'INNOVACIÓN', 'CRIMEN'],
   language: 'en-us',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://eko.red',

@@ -27,7 +27,7 @@ export default function Home({ posts }) {
           {siteMetadata.description.map((line) => (
             <a
               key={line}
-              href="#"
+              href={`/${line.toLowerCase()}`}
               className="w-64 p-1 text-center text-xl font-semibold text-gray-900 hover:text-primary-600 dark:text-gray-100 dark:hover:text-primary-600 sm:p-4"
             >
               {line}

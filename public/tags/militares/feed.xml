@@ -1,0 +1,24 @@
+
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+      <title>EKO Red News - Economía, política y mundo digital</title>
+      <link>https://eko.red/blog</link>
+      <description>MUNDO,CULTURA,INNOVACIÓN,CRIMEN</description>
+      <language>en-us</language>
+      <managingEditor>info@eko.red (EKO Red)</managingEditor>
+      <webMaster>info@eko.red (EKO Red)</webMaster>
+      <lastBuildDate>Wed, 05 Apr 2023 00:00:00 GMT</lastBuildDate>
+      <atom:link href="https://eko.red/tags/militares/feed.xml" rel="self" type="application/rss+xml"/>
+      
+  <item>
+    <guid>https://eko.red/blog/corrupcion-y-paramilitarismo-factores-que-han-acompanado-al-chavismo</guid>
+    <title>Corrupción y militarismo: factores que han acompañado al chavismo en dos décadas</title>
+    <link>https://eko.red/blog/corrupcion-y-paramilitarismo-factores-que-han-acompanado-al-chavismo</link>
+    <description>316 casos de desfalco al patrimonio nacional son investigados internacionalmente y los militares están presentes en 103 empresas públicas y 11 ministerios, recoge investigación de Transparencia Venezuela en el seguimiento a dos décadas de gobiernos chavistas. En los 8 años de gestión que lleva Nicolás Maduro ambos factores, militarismo y corrupción, se han profundizado.</description>
+    <pubDate>Wed, 05 Apr 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>corrupcion</category><category>militares</category><category>venezuela</category>
+  </item>
+
+    </channel>
+  </rss>

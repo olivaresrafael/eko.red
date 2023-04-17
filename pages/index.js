@@ -12,6 +12,10 @@ import NewsletterForm from '@/components/NewsletterForm'
 
 const MAX_DISPLAY = 8
 
+const textCleaner = (texto) => {
+  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')
 
@@ -27,7 +31,7 @@ export default function Home({ posts }) {
           {siteMetadata.description.map((line) => (
             <a
               key={line}
-              href={`/${line.toLowerCase()}`}
+              href={`/tags/${textCleaner(line.toLowerCase())}`}
               className="w-64 p-1 text-center text-xl font-semibold text-gray-900 hover:text-primary-600 dark:text-gray-100 dark:hover:text-primary-600 sm:p-4"
             >
               {line}

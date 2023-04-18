@@ -28,7 +28,7 @@ export default function Home({ posts }) {
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="grid justify-items-center sm:grid-cols-2 md:grid-cols-4">
-          {siteMetadata.description.map((line) => (
+          {siteMetadata.pages.map((line) => (
             <a
               key={line}
               href={`/tags/${textCleaner(line.toLowerCase())}`}

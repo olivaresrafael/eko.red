@@ -1,9 +1,11 @@
 const siteMetadata = {
-  title: 'EKO Red News - Economía, política y mundo digital',
+  title: 'EKO Red - Revista digital - Economía, política y mundo digital',
   author: 'EKO Red',
   headerTitle: 'EKO Red',
-  description: ['MUNDO', 'CULTURA', 'INNOVACIÓN', 'CRIMEN'],
-  language: 'en-us',
+  description:
+    'Revista digital y noticias de economía, política, cultura, mundo digital, ciberseguridad, crimen organizado, investigación.\n Promovemos la libertad de expresión, económica y social.',
+  pages: ['MUNDO', 'CULTURA', 'INNOVACIÓN', 'CRIMEN'],
+  language: 'es',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://eko.red',
   siteRepo: 'https://github.com/rafaolivares/eko.red',

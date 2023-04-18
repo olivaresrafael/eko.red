@@ -9,7 +9,7 @@ const siteMetadata = {
   theme: 'dark', // system, dark or light
   siteUrl: 'https://eko.red',
   siteRepo: 'https://github.com/rafaolivares/eko.red',
-  siteLogo: '/static/images/logo.png',
+  siteLogo: '/static/images/logo_dark.svg',
   image: '/static/images/avatar.png',
   socialBanner: '/static/images/twitter-card.png',
   email: 'info@eko.red',

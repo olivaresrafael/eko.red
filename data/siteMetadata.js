@@ -4,7 +4,7 @@ const siteMetadata = {
   headerTitle: 'EKO Red',
   description:
     'Revista digital y noticias de economía, política, cultura, mundo digital, ciberseguridad, crimen organizado, investigación.\n Promovemos la libertad de expresión, económica y social.',
-  pages: ['MUNDO', 'CULTURA', 'INNOVACIÓN', 'CRIMEN'],
+  pages: ['MUNDO', 'LATINOAMÉRICA', 'CRIMEN', 'CIBERSEGURIDAD'],
   language: 'es',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://eko.red',

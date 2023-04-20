@@ -6,15 +6,11 @@ import Box from '@/components/Box'
 import Image from '@/components/Image'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
-import formatDate from '@/lib/utils/formatDate'
+import { formatDate, textCleaner } from '@/lib/utils'
 
 import NewsletterForm from '@/components/NewsletterForm'
 
 const MAX_DISPLAY = 8
-
-const textCleaner = (texto) => {
-  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-}
 
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')

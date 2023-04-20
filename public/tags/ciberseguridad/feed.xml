@@ -1,10 +1,11 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>EKO Red News - Economía, política y mundo digital</title>
+      <title>EKO Red - Revista digital - Economía, política y mundo digital</title>
       <link>https://eko.red/blog</link>
-      <description>MUNDO,CULTURA,INNOVACIÓN,CRIMEN</description>
-      <language>en-us</language>
+      <description>Revista digital y noticias de economía, política, cultura, mundo digital, ciberseguridad, crimen organizado, investigación.
+ Promovemos la libertad de expresión, económica y social.</description>
+      <language>es</language>
       <managingEditor>info@eko.red (EKO Red)</managingEditor>
       <webMaster>info@eko.red (EKO Red)</webMaster>
       <lastBuildDate>Sun, 09 Apr 2023 00:00:00 GMT</lastBuildDate>
@@ -18,6 +19,36 @@
     <pubDate>Sun, 09 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
     <category>crimen</category><category>ciberseguridad</category><category>latinoamerica</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/latinoamerica-se-ha-convertido-en-objetivo-para-robo-de-informacion-de-ciberbandas</guid>
+    <title>Latinoamérica se ha convertido en objetivo para robo de información de ciberbandas</title>
+    <link>https://eko.red/blog/latinoamerica-se-ha-convertido-en-objetivo-para-robo-de-informacion-de-ciberbandas</link>
+    <description>Millones de dólares han tenido que pagar gobiernos y empresas por estos hackers para recuperar sus sistemas informáticos o evitar la divulgación de información privada o estratégica </description>
+    <pubDate>Sat, 08 Apr 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>crimen</category><category>ciberseguridad</category><category>ransomware</category><category>latinoamerica</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/un-pirata-venezolano-informatico-fue-acusado-por-la-fiscalia-de-nueva-york</guid>
+    <title>Un pirata venezolano informático fue acusado por la Fiscalía del Distrito de Nueva York</title>
+    <link>https://eko.red/blog/un-pirata-venezolano-informatico-fue-acusado-por-la-fiscalia-de-nueva-york</link>
+    <description>El ciberpirata es un médico venezolano a quien el FBI le seguía los pasos desde hace unos años y quien diseñó un ransomware malicioso para robar información, patrocinado por Irán</description>
+    <pubDate>Fri, 07 Apr 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>crimen</category><category>ransomware</category><category>latinoamerica</category><category>ciberseguridad</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/el-espionaje-y-las-falsas-noticias-en-la-politica-lationamercana</guid>
+    <title>El espionaje y falsas noticias en la política Latinoamericana</title>
+    <link>https://eko.red/blog/el-espionaje-y-las-falsas-noticias-en-la-politica-lationamercana</link>
+    <description>El espionaje, la contra información, informaciones falsas, suplantación de identidad, robo de información, a través de equipos de hackers especializados en esa materia son contratados por factores del poder para producir campañas sucias contra figuras políticas, periodistas, líderes de opinión o líderes empresariales</description>
+    <pubDate>Thu, 06 Apr 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>latinoamerica</category><category>crimen</category><category>ciberseguridad</category><category>mundo</category>
   </item>
 
     </channel>

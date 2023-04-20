@@ -1,10 +1,11 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>EKO Red News - Economía, política y mundo digital</title>
+      <title>EKO Red - Revista digital - Economía, política y mundo digital</title>
       <link>https://eko.red/blog</link>
-      <description>MUNDO,CULTURA,INNOVACIÓN,CRIMEN</description>
-      <language>en-us</language>
+      <description>Revista digital y noticias de economía, política, cultura, mundo digital, ciberseguridad, crimen organizado, investigación.
+ Promovemos la libertad de expresión, económica y social.</description>
+      <language>es</language>
       <managingEditor>info@eko.red (EKO Red)</managingEditor>
       <webMaster>info@eko.red (EKO Red)</webMaster>
       <lastBuildDate>Wed, 12 Apr 2023 00:00:00 GMT</lastBuildDate>
@@ -27,7 +28,7 @@
     <description>Venezuela es uno de los países en donde más se mueve la economía ilegal o negra de Latinoamérica y el mundo. Algunos analistas la ubican en 25% del PIB, muy por encima del promedio mundial que, según el FMI y el FEM, oscila entre 8 y 15% aproximadamente.</description>
     <pubDate>Tue, 11 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>latinoamerica</category><category>venezuela</category><category>economia</category><category>corrupcion</category>
+    <category>crimen</category><category>venezuela</category><category>economia</category><category>corrupcion</category>
   </item>
 
   <item>
@@ -37,7 +38,7 @@
     <description>Las sociedades offshore que financian al ejército ruso son las que permiten que se mate a civiles inocentes en Ucrania, dice el misterioso personaje anónimo que filtró los archivos del bufete Mossack Fonseca</description>
     <pubDate>Mon, 10 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>datos</category><category>crimen</category><category>finanzas</category>
+    <category>mundo</category><category>crimen</category><category>finanzas</category>
   </item>
 
   <item>
@@ -57,7 +58,7 @@
     <description>Millones de dólares han tenido que pagar gobiernos y empresas por estos hackers para recuperar sus sistemas informáticos o evitar la divulgación de información privada o estratégica </description>
     <pubDate>Sat, 08 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>cibercrimen</category><category>ransomware</category><category>latinoamerica</category>
+    <category>crimen</category><category>ciberseguridad</category><category>ransomware</category><category>latinoamerica</category>
   </item>
 
   <item>
@@ -67,7 +68,7 @@
     <description>El ciberpirata es un médico venezolano a quien el FBI le seguía los pasos desde hace unos años y quien diseñó un ransomware malicioso para robar información, patrocinado por Irán</description>
     <pubDate>Fri, 07 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>cibercrimen</category><category>ransomware</category><category>latinoamerica</category>
+    <category>crimen</category><category>ransomware</category><category>latinoamerica</category><category>ciberseguridad</category>
   </item>
 
   <item>
@@ -77,7 +78,7 @@
     <description>El espionaje, la contra información, informaciones falsas, suplantación de identidad, robo de información, a través de equipos de hackers especializados en esa materia son contratados por factores del poder para producir campañas sucias contra figuras políticas, periodistas, líderes de opinión o líderes empresariales</description>
     <pubDate>Thu, 06 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>latinoamerica</category><category>crimen</category><category>datos</category><category>mundo</category>
+    <category>latinoamerica</category><category>crimen</category><category>ciberseguridad</category><category>mundo</category>
   </item>
 
   <item>
@@ -87,7 +88,7 @@
     <description>316 casos de desfalco al patrimonio nacional son investigados internacionalmente y los militares están presentes en 103 empresas públicas y 11 ministerios, recoge investigación de Transparencia Venezuela en el seguimiento a dos décadas de gobiernos chavistas. En los 8 años de gestión que lleva Nicolás Maduro ambos factores, militarismo y corrupción, se han profundizado.</description>
     <pubDate>Wed, 05 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>corrupcion</category><category>militares</category><category>venezuela</category>
+    <category>crimen</category><category>corrupcion</category><category>militares</category><category>venezuela</category>
   </item>
 
     </channel>

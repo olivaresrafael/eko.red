@@ -10,7 +10,7 @@ export default function Footer() {
           <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size="20" />
           <SocialIcon kind="facebook" href={siteMetadata.facebook} size="20" />
           <SocialIcon kind="youtube" href={siteMetadata.youtube} size="20" />
-          <SocialIcon kind="instagram" href={siteMetadata.linkedin} size="20" />
+          <SocialIcon kind="instagram" href={siteMetadata.instagram} size="20" />
           <SocialIcon kind="twitter" href={siteMetadata.twitter} size="20" />
         </div>
         <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">

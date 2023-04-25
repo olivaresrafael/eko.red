@@ -1,6 +1,6 @@
 ---
 name: Luis Rivases
-avatar: /static/images/avatar.png
+avatar: /static/images/avatar.jpeg
 occupation: Professor of Atmospheric Science
 company: EKO Red
 email: luisrivases@metaintel.tk

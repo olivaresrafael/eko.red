@@ -7,8 +7,23 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  FacebookIcon,
+  RedditShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  EmailIcon,
+  RedditIcon,
+  TelegramIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from 'react-share'
 
 const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
+
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `${siteMetadata.siteUrl}/blog/${slug}`
@@ -18,7 +33,7 @@ const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day:
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
   const { slug, fileName, date, title, images, tags } = frontMatter
-
+  const url = `${siteMetadata.siteUrl}/blog/${slug}`
   return (
     <SectionContainer>
       <BlogSEO
@@ -110,6 +125,32 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                     </div>
                   </div>
                 )}
+                <div className="py-4 xl:py-8">
+                  <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    Compartir
+                  </h2>
+                  <div className="mt-2 flex flex-wrap space-x-1">
+                    <EmailShareButton url={url} title={title}>
+                      <EmailIcon size={30} round />
+                    </EmailShareButton>
+                    <TwitterShareButton url={url} title={title}>
+                      <TwitterIcon size={30} round />
+                    </TwitterShareButton>
+                    <FacebookShareButton url={url} title={title}>
+                      <FacebookIcon size={30} round />
+                    </FacebookShareButton>
+                    <RedditShareButton url={url} title={title}>
+                      <RedditIcon size={30} round />
+                    </RedditShareButton>
+                    <TelegramShareButton url={url} title={title}>
+                      <TelegramIcon size={30} round />
+                    </TelegramShareButton>
+                    <WhatsappShareButton url={url} title={title}>
+                      <WhatsappIcon size={30} round />
+                    </WhatsappShareButton>
+                  </div>
+                </div>
+
                 {(next || prev) && (
                   <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                     {prev && (

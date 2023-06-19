@@ -133,7 +133,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                     <EmailShareButton url={url} title={title}>
                       <EmailIcon size={30} round />
                     </EmailShareButton>
-                    <TwitterShareButton url={url} title={title}>
+                    <TwitterShareButton url={url} title={title} hashtags={tags}>
                       <TwitterIcon size={30} round />
                     </TwitterShareButton>
                     <FacebookShareButton url={url} title={title}>

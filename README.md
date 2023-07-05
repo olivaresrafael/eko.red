@@ -7,3 +7,5 @@ EKO.RED es una revista digital hecha en Next.js
 Libreria CSS
 
 by Rafael Olivares
+
+## eko.red

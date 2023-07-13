@@ -13,7 +13,7 @@ export default async (req, res) => {
     const data = { email_address: email, api_key: API_KEY }
 
     const API_ROUTE = `${API_URL}lists/${LIST_ID}/contacts`
-
+    console.log('API_ROUTE', API_ROUTE)
     const response = await fetch(API_ROUTE, {
       body: JSON.stringify(data),
       headers: {

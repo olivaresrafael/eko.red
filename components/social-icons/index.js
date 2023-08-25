@@ -6,6 +6,7 @@ import Linkedin from './linkedin.svg'
 import Twitter from './twitter.svg'
 import Tiktok from './tiktok.svg'
 import Instagram from './instagram.svg'
+import Website from './website.svg'
 
 // Icons taken from: https://simpleicons.org/
 
@@ -18,6 +19,7 @@ const components = {
   twitter: Twitter,
   instagram: Instagram,
   tiktok: Tiktok,
+  website: Website,
 }
 
 const SocialIcon = ({ kind, href, size = 18 }) => {

@@ -7,6 +7,4 @@ email: tomaspaez@eko.red
 linkedin: https://www.linkedin.com/in/tomás-páez-bravo-69933b15
 ---
 
-Sociólogo, profesor universitario, escritor, conferencista internacional y consultor empresarial. Es miembro del Comité Académico del Centro de Difusión del Conocimiento Económico (CEDICE) y Director del Centro de Estudios de Democracia y Ciudadanía.
-
-Coordinador del Observatorio de la Diáspora Venezolana (ODV) y el primer estudio global realizado sobre esa migración. Coordinador del Programa Bolívar de integración tecnológica regional y ha sido asesor de empresas e instituciones en el área estratégica empresarial , calidad y productividad.
+Sociólogo, PhD. en University College London, profesor universitario de la Universidad Central de Venezuela y de la Internacional de la Rioja, escritor, conferencista internacional y consultor empresarial. Es miembro del Comité Académico del Centro de Difusión del Conocimiento Económico (CEDICE); director del Centro de Estudios de Democracia y Ciudadanía; coordinador del Observatorio de la Diáspora Venezolana (ODV) y de su primer estudio global; coordinador del Programa Bolívar de integración tecnológica regional; asesor en áreas de estrategias empresarial, calidad y productividad. Algunos de sus libros publicados: “Tercer Observatorio de la Pequeña y Mediana Empresa de Venezuela” (2013) y “La voz de la diáspora venezolana” (2015).

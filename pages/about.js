@@ -13,7 +13,10 @@ export async function getStaticProps() {
     'observatorio-de-la-diaspora-venezolana',
   ])
   return {
-    props: { authors: { Francisco, Rafael, Tomas }, organizations: { ObservatorioDiaspora } },
+    props: {
+      authors: { Francisco, Rafael, Tomas, Marcos },
+      organizations: { ObservatorioDiaspora },
+    },
   }
 }
 

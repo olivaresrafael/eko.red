@@ -7,10 +7,20 @@ const DEFAULT_LAYOUT = 'AboutLayout'
 export async function getStaticProps() {
   const Francisco = await getFileBySlug('authors', ['folivares'])
   const Rafael = await getFileBySlug('authors', ['olivaresrafael'])
-  return { props: { Francisco, Rafael } }
+  const Marcos = await getFileBySlug('authors', ['marcostarre'])
+  const Tomas = await getFileBySlug('authors', ['tomaspaez'])
+  const ObservatorioDiaspora = await getFileBySlug('organizations', [
+    'observatorio-de-la-diaspora-venezolana',
+  ])
+  return {
+    props: {
+      authors: { Francisco, Rafael, Tomas, Marcos },
+      organizations: { ObservatorioDiaspora },
+    },
+  }
 }
 
-export default function About({ Francisco, Rafael }) {
+export default function About({ authors, organizations }) {
   return (
     <>
       <PageSEO title={`Nosotros`} description={`Nosotros`} />
@@ -20,20 +30,31 @@ export default function About({ Francisco, Rafael }) {
             Nosotros
           </h1>
         </div>
+        {Object.keys(authors).map((key) => (
+          <div className="space-y-2 pt-6 pb-8 md:space-y-5" key={key}>
+            <MDXLayoutRenderer
+              layout={authors[key].frontMatter.layout || DEFAULT_LAYOUT}
+              mdxSource={authors[key].mdxSource}
+              frontMatter={authors[key].frontMatter}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <MDXLayoutRenderer
-            layout={Francisco.frontMatter.layout || DEFAULT_LAYOUT}
-            mdxSource={Francisco.mdxSource}
-            frontMatter={Francisco.frontMatter}
-          />
+          <h1 className="text-6xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-4xl md:leading-14">
+            Nuestros Aliados
+          </h1>
         </div>
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <MDXLayoutRenderer
-            layout={Rafael.frontMatter.layout || DEFAULT_LAYOUT}
-            mdxSource={Rafael.mdxSource}
-            frontMatter={Rafael.frontMatter}
-          />
-        </div>
+        {Object.keys(organizations).map((key) => (
+          <div className="space-y-2 pt-6 pb-8 md:space-y-5" key={key}>
+            <MDXLayoutRenderer
+              layout={organizations[key].frontMatter.layout || 'OrganizationLayout'}
+              mdxSource={organizations[key].mdxSource}
+              frontMatter={organizations[key].frontMatter}
+            />
+          </div>
+        ))}
       </div>
     </>
   )

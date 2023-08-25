@@ -7,10 +7,12 @@ const DEFAULT_LAYOUT = 'AboutLayout'
 export async function getStaticProps() {
   const Francisco = await getFileBySlug('authors', ['folivares'])
   const Rafael = await getFileBySlug('authors', ['olivaresrafael'])
-  return { props: { Francisco, Rafael } }
+  const Marcos = await getFileBySlug('authors', ['marcostarre'])
+  const Tomas = await getFileBySlug('authors', ['tomaspaez'])
+  return { props: { Francisco, Rafael, Tomas } }
 }
 
-export default function About({ Francisco, Rafael }) {
+export default function About(authors) {
   return (
     <>
       <PageSEO title={`Nosotros`} description={`Nosotros`} />
@@ -20,20 +22,15 @@ export default function About({ Francisco, Rafael }) {
             Nosotros
           </h1>
         </div>
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <MDXLayoutRenderer
-            layout={Francisco.frontMatter.layout || DEFAULT_LAYOUT}
-            mdxSource={Francisco.mdxSource}
-            frontMatter={Francisco.frontMatter}
-          />
-        </div>
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <MDXLayoutRenderer
-            layout={Rafael.frontMatter.layout || DEFAULT_LAYOUT}
-            mdxSource={Rafael.mdxSource}
-            frontMatter={Rafael.frontMatter}
-          />
-        </div>
+        {Object.keys(authors).map((key) => (
+          <div className="space-y-2 pt-6 pb-8 md:space-y-5" key={key}>
+            <MDXLayoutRenderer
+              layout={authors[key].frontMatter.layout || DEFAULT_LAYOUT}
+              mdxSource={authors[key].mdxSource}
+              frontMatter={authors[key].frontMatter}
+            />
+          </div>
+        ))}
       </div>
     </>
   )

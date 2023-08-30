@@ -20,7 +20,7 @@ import {
   TelegramIcon,
   TwitterIcon,
   WhatsappIcon,
-} from 'react-share'
+} from 'next-share'
 
 const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
 

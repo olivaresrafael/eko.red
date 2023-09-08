@@ -1,15 +1,46 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>EKO Red News - Economía, política y mundo digital</title>
+      <title>EKO Red - Revista digital - Economía, política y mundo digital</title>
       <link>https://eko.red/blog</link>
-      <description>MUNDO,CULTURA,INNOVACIÓN,CRIMEN</description>
-      <language>en-us</language>
+      <description>Revista digital y noticias de economía, política, cultura, mundo digital, ciberseguridad, crimen organizado, investigación.
+ Promovemos la libertad de expresión, económica y social.</description>
+      <language>es</language>
       <managingEditor>info@eko.red (EKO Red)</managingEditor>
       <webMaster>info@eko.red (EKO Red)</webMaster>
-      <lastBuildDate>Tue, 11 Apr 2023 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Thu, 31 Aug 2023 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://eko.red/tags/economia/feed.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://eko.red/blog/el-apagon-electrico-llego-con-el-socialismo-del-siglo-xxi-en-venezuela</guid>
+    <title>El apagón eléctrico llegó con el socialismo del siglo XXI en Venezuela</title>
+    <link>https://eko.red/blog/el-apagon-electrico-llego-con-el-socialismo-del-siglo-xxi-en-venezuela</link>
+    <description>En Venezuela 31% de la población no tiene acceso al sistema eléctrico formal y trabaja a 30% de su capacidad instalada. En una investigación, coordinada por CEDICE, el ingeniero Jesús Armas presenta un diagnóstico de cómo la corrupción y la estatización de todo el servicio eléctrico nacional son las principales causales del deterioro del sistema, a pesar de tener un país de grandes reservas energéticas.</description>
+    <pubDate>Thu, 31 Aug 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>Economia</category><category>Energia</category><category>Crisis</category><category>EnergiayDignidadHumana</category><category>Hidroelectrica</category><category>Venezuela</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/las-bases-del-chavismo-ven-necesario-un-cambio-politico-en-venezuela</guid>
+    <title>Las bases del chavismo ven necesario un cambio político en Venezuela</title>
+    <link>https://eko.red/blog/las-bases-del-chavismo-ven-necesario-un-cambio-politico-en-venezuela</link>
+    <description>El más reciente estudio de la encuestadora Delphos y el Centro de Estudios Políticos de la UCAB indica que 85% de los venezolanos consideran necesario un nuevo rumbo. Esto incluye a 45% del chavismo quienes también padecen los efectos de la crisis económica e institucional.</description>
+    <pubDate>Mon, 10 Jul 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>politica</category><category>economia</category><category>venezuela</category><category>latinoamerica</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/venezuela-lidera-ranking-en-trabas-burocraticas-en-latinoamerica</guid>
+    <title>Venezuela lidera ranking en trabas burocráticas en Latinoamérica</title>
+    <link>https://eko.red/blog/venezuela-lidera-ranking-en-trabas-burocraticas-en-latinoamerica</link>
+    <description>En 2022 cerraron 40% de pequeñas y medianas empresas en Venezuela por la caída económica, exigencias burocráticas, deficientes servicios públicos y extorsiones.</description>
+    <pubDate>Mon, 19 Jun 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>politica</category><category>economia</category><category>venezuela</category><category>latinoamerica</category>
+  </item>
+
   <item>
     <guid>https://eko.red/blog/venezuela-es-uno-de-los-pases-con-mayor-circulacin-de-dinero-ilegal-y-corrupcin</guid>
     <title>Venezuela es uno de los países con mayor circulación de dinero ilegal y corrupción</title>
@@ -17,7 +48,7 @@
     <description>Venezuela es uno de los países en donde más se mueve la economía ilegal o negra de Latinoamérica y el mundo. Algunos analistas la ubican en 25% del PIB, muy por encima del promedio mundial que, según el FMI y el FEM, oscila entre 8 y 15% aproximadamente.</description>
     <pubDate>Tue, 11 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>latinoamerica</category><category>venezuela</category><category>economia</category><category>corrupcion</category>
+    <category>crimen</category><category>venezuela</category><category>economia</category><category>corrupcion</category>
   </item>
 
     </channel>

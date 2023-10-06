@@ -1,0 +1,137 @@
+<!--
+	THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/en/editor.html?c=bar-stack&code=PYBwLglsB2AEC8sDeAoWszGAG0iAXMmuhgE4QDmFApqYQOQCGAHhAM70A0x6L7ACsAjQwtQqhIkwATxDUGbABaMAJsADu9HrAC-xHd3TZqNaCvEHiFcuaKTjAMzAMAzAFIu28hUXPY9ABYPQxIAI2AwTABbV2DtAGMYMEZhABlGUOpsQjBSAFdqfRDmAEFWNkIAbW0JSQxZeX94xlEKYFJpTzrYFRbGKvoAJgAGYYBGLn8R4cHJodGXOemApdGAVlXhgDZNgHYueeGADgPpgE5T8eHLsYnOebHZ-5Gxxefxlfexja-dgF1tHp0H8QtIyuwqjVtOgZHIGAA3RjYApaSRA2Ag4hsWgQagVWDVSS1STQRhRRr0ACS0GseOAHBCklhFNCjFIXTqbGS8QA1gwKIxSfEIIwOZJEth2vgAEQAYkGZ0YR2Ga2ljJIvWSVQCW0Ga2GnFgAT1ysNOrWRzOhq2AV2a12hqO9pcBtgY3Gu12Y0NZ12WzGW0Njy2Lhtht2ATOZ0DsDOkYVQcG_uGDrdgz9t04rwCLiTiaOOatsF2gwDRYCypmALR6uJJFJ5IYAHFGFz6bAANSwCBREAFNsM6H1OH-Vns9XoLmMXn81uYQfdCVSuWhUIufWqic9PrasZnMZHQ0uM7DY9mlwuR6Gta-3WcXZnQa2n0hvc-sYBHNBssu8OnraHrGjwpomAaZmmuY6rAWaDOuTpZnuoZrNaWxnEcLhmgBRy7NWJCWESQ4NhSLaktAwqMLAABy1DJGKUgNAwY50ZO3J8v4AoDsxsBLnQcoAGKDAAIoJLgAEJqkOmr9ASObpkeawBN6sC5p6ZpRshNrodeARrIM1rphhsaRkphYBEeAZmZ-0bnuuMHDL6nAnhG1r6mZsBHIMRy4eg-EYigOgANxAA
+	⚠ Please be aware that this chart is not an official demo of Apache ECharts but is made by user-generated code.
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body style="height: 100%; margin: 0">
+    <div id="container" style="height: 100%"></div>
+
+    <script
+      type="text/javascript"
+      src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"
+    ></script>
+    <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/extension/dataTool.min.js"></script>
+  -->
+    <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+    <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+    <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+    <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/extension/bmap.min.js"></script>
+  -->
+
+    <script type="text/javascript">
+      var dom = document.getElementById('container')
+      var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false,
+      })
+      var app = {}
+
+      var option
+      var labelOptions = {
+        show: true,
+        rotate: 90,
+        formatter: ({ value }) => `${new Intl.NumberFormat().format(value)} millones de US$`,
+        fontSize: 9,
+      }
+
+      option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+        },
+        legend: {},
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true,
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: [
+              '2001',
+              '2002',
+              '2003',
+              '2004',
+              '2005',
+              '2006',
+              '2007',
+              '2008',
+              '2009',
+              '2010',
+              '2011',
+              '2012',
+              '2013',
+              '2014',
+              '2015',
+              '2016',
+            ],
+          },
+        ],
+        yAxis: {
+          type: 'value',
+          axisLabel: {
+            fomatter: (value) => `${value} millones de US$`,
+          },
+        },
+        series: [
+          {
+            name: 'Ingresos',
+            type: 'bar',
+            stack: 'ganacia',
+            color: '#29a805',
+            label: labelOptions,
+            data: [
+              46250, 42580, 46589, 64757, 85730, 101771, 97616, 126364, 74996, 94929, 126107,
+              127611, 134326, 128439, 72169, 48002,
+            ],
+          },
+          {
+            name: 'Gastos + impuestos',
+            type: 'bar',
+            stack: 'gastos',
+            color: '#bb3505',
+            label: labelOptions,
+            data: [
+              41918, 39039, 43312, 59762, 79247, 96319, 91443, 116930, 70368, 91207, 121611, 123246,
+              123585, 119365, 66983, 46887,
+            ],
+          },
+          {
+            name: 'Ganancia Neta',
+            type: 'bar',
+            stack: 'gastos',
+            color: '#F2DD3B',
+            data: [
+              4327, 3541, 3277, 4995, 6483, 5452, 6273, 9491, 4394, 3164, 4496, 4335, 12097, 9074,
+              6504, 828,
+            ],
+          },
+        ],
+      }
+
+      if (option && typeof option === 'object') {
+        myChart.setOption(option)
+      }
+
+      window.addEventListener('resize', myChart.resize)
+    </script>
+  </body>
+</html>

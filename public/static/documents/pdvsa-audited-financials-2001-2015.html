@@ -44,7 +44,7 @@
       var labelOptions = {
         show: true,
         rotate: 90,
-        formatter: ({ value }) => `${new Intl.NumberFormat().format(value)} millones de US$`,
+        formatter: ({ value }) => `${new Intl.NumberFormat().format(value)}`,
         fontSize: 9,
       }
 
@@ -87,9 +87,6 @@
         ],
         yAxis: {
           type: 'value',
-          axisLabel: {
-            fomatter: (value) => `${value} millones de US$`,
-          },
         },
         series: [
           {

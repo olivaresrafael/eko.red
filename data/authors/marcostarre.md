@@ -1,5 +1,5 @@
 ---
-name: Marcos Briceño
+name: Marcos Tarre
 avatar: /static/images/avatar/marcos.jpeg
 occupation: Analista y Consultor
 twitter: https://twitter.com/marcostarre

@@ -8,27 +8,27 @@
       <language>es</language>
       <managingEditor>info@eko.red (EKO Red)</managingEditor>
       <webMaster>info@eko.red (EKO Red)</webMaster>
-      <lastBuildDate>Fri, 13 Oct 2023 00:00:00 GMT</lastBuildDate>
+      <lastBuildDate>Thu, 19 Oct 2023 00:00:00 GMT</lastBuildDate>
       <atom:link href="https://eko.red/feed.xml" rel="self" type="application/rss+xml"/>
       
+  <item>
+    <guid>https://eko.red/blog/venezuela-lleva-paralizada-seis-anos-con-una-deuda-de-dollar160-mil-millones-y-sin-creditos-internacionales</guid>
+    <title>Venezuela lleva paralizada seis años con una deuda de $160 mil millones y sin créditos internacionales</title>
+    <link>https://eko.red/blog/venezuela-lleva-paralizada-seis-anos-con-una-deuda-de-dollar160-mil-millones-y-sin-creditos-internacionales</link>
+    <description>Ya van seis años en que el país se encuentra en default por impago de su deuda la cual alcanzará para el año 2024 la cantidad de 200 mil millones de dólares de no producirse cambios políticos y económicos que permitan ir a un proceso de reestructuración. Un estudio auspiciado por la organización civil Cedice Libertad, con varios expertos, ofrece puntos claves para superar el estancamiento económico.</description>
+    <pubDate>Thu, 19 Oct 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>Venezuela</category><category>Latinoamerica</category><category>Deuda</category><category>PDVSA</category><category>Bonos</category><category>Economia</category><category>CEDICE</category>
+  </item>
+
   <item>
     <guid>https://eko.red/blog/argentina-en-un-dificil-momento-politico-y-economico</guid>
     <title>Argentina en un difícil momento político y económico</title>
     <link>https://eko.red/blog/argentina-en-un-dificil-momento-politico-y-economico</link>
-    <description>A escasos días de celebrarse la elección presidencial en Argentina, previstas para el domingo 22 de octubre, el país se debate entre las opciones representadas por Javier Milei, del partido La Libertad Avanza, Sergio Massa por el Frente Renovador que forma parte de la coalición Unión por la Patria y Patricia Bullrich de la Propuesta Republicana, adscrita a la alianza de Juntos Por el Cambio, como los principales aspirantes.</description>
+    <description>A escasos días de celebrarse la elección presidencial en Argentina, prevista para el domingo 22 de octubre, el país se debate entre las opciones representadas por Javier Milei, del partido La Libertad Avanza, Sergio Massa por el Frente Renovador que forma parte de la coalición Unión por la Patria y Patricia Bullrich de la Propuesta Republicana, adscrita a la alianza de Juntos Por el Cambio, como los principales aspirantes.</description>
     <pubDate>Fri, 13 Oct 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>Argenrtina</category><category>Latinoamerica</category><category>Inflacion</category><category>Elecciones Argentina</category><category>Politica</category><category>Javier Milei</category>
-  </item>
-
-  <item>
-    <guid>https://eko.red/blog/cronicas-de-bajmut-parte-3</guid>
-    <title>Crónicas de Bajmut - KIA K.I.A.</title>
-    <link>https://eko.red/blog/cronicas-de-bajmut-parte-3</link>
-    <description>Marcos, ¿no te he contado cómo fue el primer combate en el que estuve, no?</description>
-    <pubDate>Tue, 10 Oct 2023 00:00:00 GMT</pubDate>
-    <author>info@eko.red (EKO Red)</author>
-    <category>Cronicas</category><category>Ficcion</category><category>Bajmut</category><category>Ucrania</category>
+    <category>Argenrtina</category><category>Latinoamerica</category><category>Inflacion</category><category>Elecciones</category><category>Politica</category><category>Javier Milei</category><category>Internacional</category>
   </item>
 
   <item>
@@ -49,6 +49,16 @@
     <pubDate>Sun, 24 Sep 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
     <category>Economia</category><category>Energia</category><category>Crisis</category><category>Gas</category><category>Venezuela</category>
+  </item>
+
+  <item>
+    <guid>https://eko.red/blog/cronicas-de-bajmut-parte-3</guid>
+    <title>Crónicas de Bajmut - KIA K.I.A.</title>
+    <link>https://eko.red/blog/cronicas-de-bajmut-parte-3</link>
+    <description>Marcos, ¿no te he contado cómo fue el primer combate en el que estuve, no?</description>
+    <pubDate>Sat, 23 Sep 2023 00:00:00 GMT</pubDate>
+    <author>info@eko.red (EKO Red)</author>
+    <category>Cronicas</category><category>Ficcion</category><category>Bajmut</category><category>Ucrania</category>
   </item>
 
   <item>

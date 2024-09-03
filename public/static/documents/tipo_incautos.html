@@ -1,0 +1,91 @@
+<!--
+	THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/en/editor.html?c=pie-simple&code=PYBwLglsB2AEC8sDeAoWtJgDYFMBcya6GOAHmAQOQAqEIwsAJjrBNAMYCGArmJ-1Gg4AzrBAAnCAFsc4jJJnCw4lgCYADKoAslADRF0uAGYVYldjmhhZlIgF996MMGBZIIAqmLyIAc1-yVBDWUrboDkS4AdCMngawwJKWppQAbrKQXFh68cYpeWGwEejCshAiBADa8V7esNCcMlQAguwWwqIAYuLAoY51YACeIPhmIOU5dbDinIwQ3MJUABzqAKSTU8RYnABGOFhxU0aJUpxg1uJUSOx26_3e9MLBgkHQT8wb3sdWAMoQAF6jACMAFZ4sU6owzpwqvFvEhYKlOFhuKMAGzqXT1RqjGiyFRKFSUIr3OoIpEo4EATixDSaZgAspxxABbyCnYTEiFTcnI1EEADMtJxVE6KNSEGRIi5pPhiL5wMx2PplAAonAAAqo8TOTkkuHEXmUghLYUq9WwZqyUDa3Vcg0AXVlsBwUhAAAtOE9FoRNqwQj8hrhDn7YMJPYxgAB3ABCKMusCBmIN3nDs2jAHkjEZSmAABoEZOhsMR6MAYVciSo4l8O04AAolU2seoAHQggCUhSmdgNve8_dgDpQdgA3EA
+	⚠ Please be aware that this chart is not an official demo of Apache ECharts but is made by user-generated code.
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body style="height: 100%; margin: 0">
+    <div id="container" style="height: 100%"></div>
+
+    <script
+      type="text/javascript"
+      src="https://fastly.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"
+    ></script>
+
+    <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.5.1/dist/extension/dataTool.min.js"></script>
+  -->
+    <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+    <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+    <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-graph-modularity@2/dist/echarts-graph-modularity.min.js"></script>
+  -->
+    <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+    <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.5.1/dist/extension/bmap.min.js"></script>
+  -->
+
+    <script type="text/javascript">
+      var dom = document.getElementById('container')
+      var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false,
+      })
+      var app = {}
+
+      var option
+
+      option = {
+        tooltip: {
+          trigger: 'item',
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+        },
+        series: [
+          {
+            name: 'Access From',
+            type: 'pie',
+            radius: '80%',
+            label: {
+              formatter: '{c}%',
+              position: 'inside',
+              fontSize: 15,
+            },
+            data: [
+              { value: 60, name: 'Terrestre' },
+              { value: 19, name: 'Marítimas' },
+              { value: 3, name: 'Fluviales' },
+              { value: 10, name: 'En Puertos' },
+              { value: 8, name: 'En Aeropuertos' },
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+              },
+            },
+          },
+        ],
+      }
+
+      if (option && typeof option === 'object') {
+        myChart.setOption(option)
+      }
+
+      window.addEventListener('resize', myChart.resize)
+    </script>
+  </body>
+</html>

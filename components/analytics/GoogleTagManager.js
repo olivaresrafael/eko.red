@@ -1,5 +1,4 @@
 import Script from 'next/script'
-import NoScript from 'next/noscript'
 
 import siteMetadata from '@/data/siteMetadata'
 
@@ -15,12 +14,12 @@ const GTMScript = () => {
           })(window,document,'script','dataLayer','${siteMetadata.analytics.googleTagManagerId});
         `}
       </Script>
-      <NoScript id="gtm-noscript">
+      <>
         {`
           <iframe src="https://www.googletagmanager.com/ns.html?id=${siteMetadata.analytics.googleTagManagerId}"
           height="0" width="0" style="display:none;visibility:hidden"></iframe>
         `}
-      </NoScript>
+      </>
     </>
   )
 }

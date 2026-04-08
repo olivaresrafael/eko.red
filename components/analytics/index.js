@@ -1,4 +1,5 @@
 import GA from './GoogleAnalytics'
+import GTM from './GoogleTagManager'
 import Plausible from './Plausible'
 import SimpleAnalytics from './SimpleAnalytics'
 import Umami from './Umami'

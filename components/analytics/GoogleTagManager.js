@@ -14,12 +14,14 @@ const GTMScript = () => {
           })(window,document,'script','dataLayer','${siteMetadata.analytics.googleTagManagerId});
         `}
       </Script>
-      <>
-        {`
-          <iframe src="https://www.googletagmanager.com/ns.html?id=${siteMetadata.analytics.googleTagManagerId}"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe>
-        `}
-      </>
+      <noscript id="gtm-noscript">
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${siteMetadata.analytics.googleTagManagerId}`}
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        />
+      </noscript>
     </>
   )
 }

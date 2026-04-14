@@ -12,7 +12,7 @@ const ContentSecurityPolicy = `
   media-src 'none';
   connect-src *;
   font-src 'self';
-  frame-src 'self' giscus.app https://pagead2.googlesyndication.com
+  frame-src 'self' giscus.app https://pagead2.googlesyndication.com/;
 `
 
 const securityHeaders = [

@@ -56,6 +56,9 @@ const siteMetadata = require('../data/siteMetadata')
               .join('')}
         </urlset>
     `
+  const ads = `
+    google.com, pub-1739410308379466, DIRECT, f08c47fec0942fa0
+    `
 
   const formatted = prettier.format(sitemap, {
     ...prettierConfig,
@@ -64,4 +67,5 @@ const siteMetadata = require('../data/siteMetadata')
 
   // eslint-disable-next-line no-sync
   fs.writeFileSync('public/sitemap.xml', formatted)
+  fs.writeFileSync('public/ads.txt', ads)
 })()

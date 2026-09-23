@@ -7,6 +7,7 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import SupportButton from '@/components/SupportButton'
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -109,6 +110,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                 {` • `}
                 <Link href={editUrl(fileName)}>{'View on GitHub'}</Link>
               </div>
+              <SupportButton />
               <Comments frontMatter={frontMatter} />
             </div>
             <footer>

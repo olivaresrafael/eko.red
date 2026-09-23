@@ -34,8 +34,17 @@ const siteMetadata = {
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
     // Please add your .env file and modify it according to your selection
+    // TEMPORALMENTE DESHABILITADA (la cuenta no funciona) → para reactivar: enabled: true
+    enabled: false,
     title: 'Suscríbete a la Newsletter',
     provider: 'emailoctopus',
+  },
+  // Botón de apoyo al sitio. Deja url vacía ('') para ocultarlo.
+  // Futuro: https://www.buymeacoffee.com/<tu-usuario>
+  support: {
+    provider: 'buymeacoffee',
+    url: '',
+    text: 'Buy Me a Coffee',
   },
   comment: {
     // If you want to use a commenting system other than giscus you have to add it to the

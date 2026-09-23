@@ -27,17 +27,19 @@
 
 ## Fase 2 — Desactivaciones temporales (pedido por el equipo)
 
-- [ ] **2.1 Ocultar la newsletter temporalmente** (la cuenta de EmailOctopus no funciona)
-  - Ocultar `NewsletterForm` / `BlogNewsletterForm` en home, posts y footer.
-  - No borrar `pages/api/emailoctopus.js` ni la config en `siteMetadata.js` — solo ocultar la UI para reactivar fácilmente.
-  - Marcar en `siteMetadata.js`: `newsletter.enabled = false` como interruptor.
-- [ ] **2.2 Desactivar el sistema de suscripciones de pago** (no hay cuentas disponibles)
-  - Eliminar el modal `Suscribe()` en `pages/blog/[...slug].js` (hoy es código muerto: nunca se renderiza e importa `signUp`, que no existe en next-auth).
-  - Ocultar/eliminar `pages/login.js` (form no funcional, manda a `#`) y el link de Login comentado en `headerNavLinks.js`.
-  - Dejar documentado: en el futuro se agregará un botón de **Buy Me a Coffee**.
-- [ ] **2.3 Preparar slot para Buy Me a Coffee (futuro)**
-  - Agregar en `siteMetadata.js`: `support: { provider: 'buymeacoffee', url: '' }`.
-  - Dejar el botón oculto en footer/fin de article hasta que se defina la URL.
+- [x] **2.1 Ocultar la newsletter temporalmente** (la cuenta de EmailOctopus no funciona)
+  - Interruptor agregado: `siteMetadata.newsletter.enabled = false` (poner `true` para reactivar).
+  - Home (`pages/index.js`) ahora exige `enabled && provider !== ''`.
+  - `NewsletterForm` retorna `null` si está deshabilitada → también oculta `<BlogNewsletterForm>` en posts MDX.
+  - API `pages/api/emailoctopus.js` y config del provider **no se borraron** (reversión fácil).
+- [x] **2.2 Desactivar el sistema de suscripciones de pago** (no hay cuentas disponibles)
+  - Modal `Suscribe()` eliminado de `pages/blog/[...slug].js` (era código muerto; también sacó los imports rotos `signUp`/next-auth/headlessui).
+  - `pages/login.js` eliminado (form no funcional) y link de Login comentado fuera de `headerNavLinks.js`.
+  - `LayoutWrapper.js`: rama muerta de sesión/Logout eliminada (sin `useSession`/`signOut`).
+  - Se conserva la infra de next-auth (`_app.js` + `api/auth/[...nextauth].js`) por si se retoma.
+- [x] **2.3 Preparar slot para Buy Me a Coffee (futuro)**
+  - `siteMetadata.support = { provider: 'buymeacoffee', url: '', text: 'Buy Me a Coffee' }`.
+  - Nuevo `components/SupportButton.js` (no se renderiza si `url` está vacío), montado en `Footer.js` y al final del artículo en `layouts/PostLayout.js`. Para activarlo: poner la URL.
 
 ---
 

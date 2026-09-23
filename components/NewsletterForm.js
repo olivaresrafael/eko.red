@@ -9,6 +9,10 @@ const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
   const [message, setMessage] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 
+  // Newsletter deshabilitada temporalmente (siteMetadata.newsletter.enabled).
+  // Este guard oculta también los usos de <BlogNewsletterForm> dentro de los posts MDX.
+  if (!siteMetadata.newsletter.enabled) return null
+
   const subscribe = async (e) => {
     e.preventDefault()
 

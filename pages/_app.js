@@ -9,7 +9,9 @@ import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 
 import siteMetadata from '@/data/siteMetadata'
+import AdSense from '@/components/AdSense'
 import Analytics from '@/components/analytics'
+import CookieConsent from '@/components/CookieConsent'
 import LayoutWrapper from '@/components/LayoutWrapper'
 import { ClientReload } from '@/components/ClientReload'
 
@@ -24,6 +26,8 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
       </Head>
       {isDevelopment && isSocket && <ClientReload />}
       <Analytics />
+      <AdSense />
+      <CookieConsent />
       <SessionProvider session={session}>
         <LayoutWrapper>
           <Component {...pageProps} />

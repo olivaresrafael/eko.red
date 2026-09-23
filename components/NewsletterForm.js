@@ -4,6 +4,7 @@ import siteMetadata from '@/data/siteMetadata'
 
 const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
   const inputEl = useRef(null)
+  const honeypotEl = useRef(null)
   const [error, setError] = useState(false)
   const [message, setMessage] = useState('')
   const [subscribed, setSubscribed] = useState(false)
@@ -14,6 +15,7 @@ const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
     const res = await fetch(`/api/${siteMetadata.newsletter.provider}`, {
       body: JSON.stringify({
         email: inputEl.current.value,
+        website: honeypotEl.current?.value || '',
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -38,6 +40,16 @@ const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
     <div>
       <div className="pb-1 text-lg font-semibold text-gray-800 dark:text-gray-100">{title}</div>
       <form className="flex flex-col sm:flex-row" onSubmit={subscribe}>
+        {/* Honeypot: oculto para humanos, atrae a los bots */}
+        <input
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden"
+          aria-hidden="true"
+          ref={honeypotEl}
+        />
         <div>
           <label className="sr-only" htmlFor="email-input">
             Email address

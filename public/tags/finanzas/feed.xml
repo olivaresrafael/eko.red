@@ -1,10 +1,11 @@
 
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>EKO Red News - Economía, política y mundo digital</title>
+      <title>EKO Red - Revista digital - Economía, política y mundo digital</title>
       <link>https://eko.red/blog</link>
-      <description>MUNDO,CULTURA,INNOVACIÓN,CRIMEN</description>
-      <language>en-us</language>
+      <description>Revista digital y noticias de economía, política, cultura, mundo digital, ciberseguridad, crimen organizado, investigación.
+ Promovemos la libertad de expresión, económica y social.</description>
+      <language>es</language>
       <managingEditor>info@eko.red (EKO Red)</managingEditor>
       <webMaster>info@eko.red (EKO Red)</webMaster>
       <lastBuildDate>Mon, 10 Apr 2023 00:00:00 GMT</lastBuildDate>
@@ -17,7 +18,7 @@
     <description>Las sociedades offshore que financian al ejército ruso son las que permiten que se mate a civiles inocentes en Ucrania, dice el misterioso personaje anónimo que filtró los archivos del bufete Mossack Fonseca</description>
     <pubDate>Mon, 10 Apr 2023 00:00:00 GMT</pubDate>
     <author>info@eko.red (EKO Red)</author>
-    <category>datos</category><category>crimen</category><category>finanzas</category>
+    <category>mundo</category><category>crimen</category><category>finanzas</category>
   </item>
 
     </channel>

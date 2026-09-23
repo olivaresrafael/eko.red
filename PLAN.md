@@ -7,21 +7,21 @@
 
 ## Fase 1 — Crítico: seguridad y legal
 
-- [ ] **1.1 Rotar y externalizar el secret de NextAuth**
-  - El secret está hardcodeado en `pages/api/auth/[...nextauth].js:11`.
-  - Mover a variable de entorno `AUTH_SECRET` y **rotar el secret expuesto** (quedó en el historial de git).
-- [ ] **1.2 Secret de Google OAuth expuesto al navegador**
-  - `NEXT_PUBLIC_GOOGLE_SECRET` se inyecta en el bundle del cliente.
-  - Renombrar a `GOOGLE_CLIENT_SECRET` (solo servidor) y actualizar Vercel/env local.
-- [ ] **1.3 Consentimiento de cookies (RGPD / LSSI)**
-  - GA (`G-35RZM39FET`), AdSense y giscus cargan sin consentimiento.
-  - Agregar banner de consentimiento y cargar GA/AdSense solo tras opt-in.
-- [ ] **1.4 Alinear CSP con AdSense**
-  - `pagead2.googlesyndication.com` se carga en `_document.js` pero no está en `script-src` (`next.config.js`).
-  - Decidir: ¿usamos AdSense de verdad? No hay ningún `<ins class="adsbygoogle">` en el código → **si no se usa, eliminar el `<script>` de `_document.js`** (también quita el `google-adsense-account` de `SEO.js`).
-- [ ] **1.5 Blindar `/api/emailoctopus`**
-  - Sin rate limit, sin honeypot y filtra `error.message` al cliente.
-  - Agregar validación, límite de intentos y mensajes de error genéricos.
+- [x] **1.1 Rotar y externalizar el secret de NextAuth**
+  - El secret estaba hardcodeado en `pages/api/auth/[...nextauth].js:11`.
+  - Movido a variable de entorno `AUTH_SECRET`. **PENDIENTE MANUAL: rotar el secret expuesto** (quedó en el historial de git) — generar uno nuevo con `openssl rand -base64 32` y actualizarlo en Vercel.
+- [x] **1.2 Secret de Google OAuth expuesto al navegador**
+  - `NEXT_PUBLIC_GOOGLE_SECRET` se inyectaba en el bundle del cliente.
+  - Renombrado a `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` (solo servidor) + `AUTH_SECRET` en `.env.example`. **PENDIENTE MANUAL: actualizar las env vars en Vercel.**
+- [x] **1.3 Consentimiento de cookies (RGPD / LSSI)**
+  - GTM/AdSense cargaban sin consentimiento.
+  - Creado `components/CookieConsent.js` (banner aceptar/rechazar, persiste en localStorage) y hook `useCookieConsent`.
+  - `components/analytics/index.js` solo renderiza scripts tras opt-in; `components/AdSense.js` solo carga AdSense tras opt-in.
+- [x] **1.4 Alinear CSP con AdSense**
+  - La CSP ya incluía `pagead2.googlesyndication.com` y `ep2.adtrafficquality.google` (hecho a mano).
+  - El `<script>` de AdSense salió de `_document.js` → ahora vive en `components/AdSense.js` con consentimiento. El cliente se movió a `siteMetadata.analytics.adsenseClient`. **Pendiente de decidir: si no hay unidades `<ins class="adsbygoogle">`, eliminar componente + meta en `SEO.js`.**
+- [x] **1.5 Blindar `/api/emailoctopus`**
+  - Ahora: solo POST, rate limit (5/min por IP), validación de email, honeypot `website` (en `NewsletterForm`), mensajes de error genéricos (sin filtrar `error.message`) y log en servidor.
 
 ---
 

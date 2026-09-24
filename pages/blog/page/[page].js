@@ -1,6 +1,7 @@
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
+import { buildWidgets } from '@/lib/widgets'
 import ListLayout from '@/layouts/ListLayout'
 import { POSTS_PER_PAGE } from '../../blog'
 
@@ -22,6 +23,7 @@ export async function getStaticProps(context) {
     params: { page },
   } = context
   const posts = await getAllFilesFrontMatter('blog')
+  const widgets = await buildWidgets()
   const pageNumber = parseInt(page)
   const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),
@@ -37,11 +39,12 @@ export async function getStaticProps(context) {
       posts,
       initialDisplayPosts,
       pagination,
+      widgets,
     },
   }
 }
 
-export default function PostPage({ posts, initialDisplayPosts, pagination }) {
+export default function PostPage({ posts, initialDisplayPosts, pagination, widgets }) {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
@@ -49,7 +52,8 @@ export default function PostPage({ posts, initialDisplayPosts, pagination }) {
         posts={posts}
         initialDisplayPosts={initialDisplayPosts}
         pagination={pagination}
-        title="All Posts"
+        widgets={widgets}
+        title="Todos los artículos"
       />
     </>
   )

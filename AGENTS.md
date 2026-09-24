@@ -31,14 +31,26 @@ Install dependencies with `yarn` (yarn.lock is authoritative; do not use npm).
 ## Project structure
 
 - `pages/` — routes (Pages Router): `index.js`, `blog/[...slug].js`, `tags/`,
-  `about.js`, `login.js`, `404.js`, `api/` (newsletter providers + `api/auth/[...nextauth].js`)
+  `about.js`, `404.js`, `api/` (newsletter providers + `api/auth/[...nextauth].js`)
 - `components/` — shared UI (`Card`, `Box`, `SEO`, `LayoutWrapper`, `MDXComponents`, ...)
 - `layouts/` — page templates: `PostLayout`, `PostSimple`, `ListLayout`,
-  `AboutLayout`, `AuthorLayout`, `OrganizationLayout`
-- `lib/` — MDX pipeline (`mdx.js`), custom remark plugins, `utils/`, `generate-rss.js`
+  `AboutLayout`, `AuthorLayout`, `OrganizationLayout`, `Sidebar`
+- `lib/` — MDX pipeline (`mdx.js`), custom remark plugins, `utils/`,
+  `generate-rss.js`, `sections.js` (visible sections), `widgets.js` (builds
+  sidebar widget content from posts/authors)
 - `data/` — all site content and config:
-  - `siteMetadata.js` — site title, nav pages, analytics/comments/newsletter config
+  - `siteMetadata.js` — site title, nav pages, analytics/comments/newsletter
+    config; `topTags` = tags of the fixed top bar and the mobile menu
+    (each must link to an existing `/tags/<slug>`, i.e. ≥1 published post)
   - `headerNavLinks.js` — header navigation
+  - `sections.js` — sections bar (header, scroll bar, mobile menu): entries are
+    `{ title, tag, requiresContent? }` → `/tags/<tag>`. Entries with
+    `requiresContent: true` (Kanaime) are hidden until ≥1 non-draft post uses
+    that tag; `next.config.js` computes this at build/dev start and injects it
+    as `NEXT_PUBLIC_SECTIONS` (restart the server after publishing the first
+    post of a new section)
+  - `widgets.js` — sidebar widget config (`id`, `type`, `title`, `enabled`,
+    `limit`, `includeImg`); rendered by `layouts/Sidebar.js`
   - `blog/*.mdx` — posts
   - `authors/*.md` — author profiles
 - `scripts/` — `compose.js` (new post), `generate-sitemap.js`, `next-remote-watch.js`
@@ -69,16 +81,25 @@ Required frontmatter:
 ```yaml
 ---
 title: 'Post title'
-date: 'YYYY-MM-DD'
+date: '2026-09-23T14:30:00-04:00' # hora local con offset (permite 2 posts el mismo día)
+# date legado aceptado: 'YYYY-MM-DD' (se muestra en UTC, sin hora)
 tags: ['tag1', 'tag2']
 draft: false
 summary: 'Short description used in lists and meta description'
 images: ['/static/images/blog/cover.jpeg']
 authors: ['author-id'] # matches data/authors/<author-id>.md
 layout: PostLayout # optional; defaults to PostLayout
+featured: true # optional; homepage hero regardless of date (ignored if draft: true)
+featuredOrder: 1 # optional; tie-break between multiple featured (lower = first)
 canonicalUrl: '' # optional
 ---
 ```
+
+- `featured: true` makes the post the homepage main note even if it is not the
+  newest: hero = first `featured` (by `featuredOrder`, then date), the rest of
+  `featured` follow in the card slots, then the rest chronologically. If no
+  post is featured, the newest is the hero. Drafts are always ignored.
+  `node scripts/compose.js` prompts for it.
 
 - Author profiles: `data/authors/<id>.md` with frontmatter
   `name`, `avatar`, `occupation`, `twitter`, `email`, `linkedin`, `github`.

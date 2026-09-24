@@ -8,6 +8,7 @@ import siteMetadata from '@/data/siteMetadata'
 import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import SupportButton from '@/components/SupportButton'
+import { formatDateTime } from '@/lib/utils/formatDate'
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -33,7 +34,7 @@ const discussUrl = (slug) =>
 const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
-  const { slug, fileName, date, title, images, tags } = frontMatter
+  const { slug, fileName, date, dateRaw, title, images, tags } = frontMatter
   const url = `${siteMetadata.siteUrl}/blog/${slug}`
   return (
     <SectionContainer>
@@ -51,9 +52,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
+                    <time dateTime={date}>{formatDateTime(date, dateRaw, postDateTemplate)}</time>
                   </dd>
                 </div>
               </dl>

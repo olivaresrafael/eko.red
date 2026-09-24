@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
+import siteMetadata from '@/data/siteMetadata'
+import sections from '@/lib/sections'
+import kebabCase from '@/lib/utils/kebabCase'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
@@ -18,7 +21,7 @@ const MobileNav = () => {
   }
 
   return (
-    <div className="sm:hidden">
+    <div className="md:hidden">
       <button
         type="button"
         className="ml-1 mr-1 h-8 w-8 rounded py-1"
@@ -64,18 +67,44 @@ const MobileNav = () => {
             </svg>
           </button>
         </div>
-        <nav className="fixed mt-8 h-full">
-          {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-12 py-4">
+        <nav className="fixed mt-8 h-full overflow-y-auto pb-10">
+          {sections.map((section) => (
+            <div key={section.tag} className="px-12 py-3">
               <Link
-                href={link.href}
-                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                href={`/tags/${section.tag}`}
+                className="text-xl font-bold uppercase tracking-widest text-gray-900 dark:text-gray-100"
                 onClick={onToggleNav}
               >
-                {link.title}
+                {section.title}
               </Link>
             </div>
           ))}
+          <div className="mt-2 border-t border-gray-300 pt-2 dark:border-gray-600">
+            {headerNavLinks.map((link) => (
+              <div key={link.title} className="px-12 py-4">
+                <Link
+                  href={link.href}
+                  className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                  onClick={onToggleNav}
+                >
+                  {link.title}
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div className="mt-2 border-t border-gray-300 pt-2 dark:border-gray-600">
+            {siteMetadata.topTags.map((tag) => (
+              <div key={tag} className="px-12 py-3">
+                <Link
+                  href={`/tags/${kebabCase(tag)}`}
+                  className="text-xl font-bold tracking-widest text-primary-600 hover:text-primary-700 dark:text-primary-500 dark:hover:text-primary-400"
+                  onClick={onToggleNav}
+                >
+                  {tag}
+                </Link>
+              </div>
+            ))}
+          </div>
         </nav>
       </div>
     </div>

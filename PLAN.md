@@ -45,68 +45,82 @@
 
 ## Fase 3 — Sistema de fechas con hora
 
-- [ ] **3.1 Frontmatter con fecha y hora** (para publicar 2 artículos el mismo día)
+- [x] **3.1 Frontmatter con fecha y hora** (para publicar 2 artículos el mismo día)
   - Formato ISO 8601: `date: '2026-09-23T14:30:00-04:00'` (con zona horaria).
-  - Las cadenas ISO ya ordenan correctamente con `dateSortDesc` en `lib/mdx.js` — verificar compatibilidad con fechas antiguas (`YYYY-MM-DD` sin hora).
-- [ ] **3.2 Actualizar `scripts/compose.js`** para pedir hora al crear un post (default: ahora).
-- [ ] **3.3 Mostrar hora en el frontend**
-  - `layouts/PostLayout.js` y `layouts/PostSimple.js`: cambiar `toLocaleDateString` por `toLocaleString` con hora y minutos (`siteMetadata.locale`).
-  - `lib/utils/formatDate.js`: nueva opción `formatDateTime` y usarla en listados (home, `/blog`, tags).
-- [ ] **3.4 Ordenar por fecha+hora** donde se liste contenido (home, blog, tags, RSS, sitemap).
-- [ ] **3.5 Actualizar AGENTS.md** con el nuevo formato de fecha.
+  - Verificado: las cadenas ISO se normalizan a UTC en `lib/mdx.js` y `dateSortDesc` ordena bien mezclando con fechas antiguas (`YYYY-MM-DD` sin hora) — probado con Node.
+  - Además se preserva `dateRaw` (fecha cruda del frontmatter) para el display.
+- [x] **3.2 Actualizar `scripts/compose.js`** para pedir hora al crear un post (default: ahora)
+  - Nuevo prompt "Hora de publicación (HH:MM, hora local)" con default = hora actual.
+  - Escribe `date: 'YYYY-MM-DDTHH:mm±HH:MM'` con el offset local → la hora no depende del tz del servidor.
+- [x] **3.3 Mostrar hora en el frontend**
+  - `formatDate.js`: nuevo export `formatDateTime(date, dateRaw, extraOptions)`.
+    - Posts con hora → fecha + hora en la tz del lector.
+    - Posts legados sin hora → solo fecha, renderizada en **UTC**.
+  - Aplicado en `PostLayout` (con día de la semana), `PostSimple`, home (`pages/index.js`) y `ListLayout` (`/blog`, tags, paginación).
+  - **Bug corregido**: los posts legados mostraban el día anterior en zonas UTC-X (ej. "31 de mayo" en vez de "1 de junio") — verificado en el HTML del build.
+- [x] **3.4 Ordenar por fecha+hora** donde se liste contenido (home, blog, tags, RSS, sitemap)
+  - Todo fluye desde `getAllFilesFrontMatter`/`getFileBySlug` (normalizados a ISO UTC) → home, `/blog`, tags y RSS (`pubDate`) ordenan por fecha+hora. Sitemap no ordena por fecha (no aplica).
+- [x] **3.5 Actualizar AGENTS.md** con el nuevo formato de fecha.
 
 ---
 
 ## Fase 4 — Sistema de sidebar con widgets
 
-- [ ] **4.1 Diseñar config de widgets** en `data/widgets.js`:
-  ```js
-  // ej: lista de autores, categorías, archivo, soporte
-  export default [
-    { id: 'authors', type: 'authors', title: 'Autores', enabled: true },
-    { id: 'categories', type: 'categories', title: 'Secciones', enabled: true },
-    // ...
-  ]
-  ```
-- [ ] **4.2 Crear `components/sidebar/`**
-  - `Sidebar.js` (renderiza widgets según config) + `widgets/AuthorsList.js`, `widgets/CategoriesList.js`, `widgets/RecentPosts.js`.
-- [ ] **4.3 Integrar layout de 2 columnas**
-  - Aplicar en home y/o `/blog` (y opcionalmente en posts vía `PostLayout`): grid `lg:grid-cols-[1fr_300px]`.
-  - Responsive: en móvil el sidebar va debajo del contenido.
-- [ ] **4.4 Widget de autores**: lista con avatar + nombre, linking a `/authors/[id]` (ver Fase 7.2 si se crean esas rutas; si no, filtrando por tag/URL externa).
-- [ ] **4.5 Widget de categorías**: conteo de artículos por tag/sección.
+- [x] **4.1 Diseñar config de widgets** en `data/widgets.js`
+  - Implementado: `[{ id, type: 'authors' | 'categories' | 'latest', title, enabled, limit, includeImg }]` — `enabled: false` oculta el widget sin borrarlo.
+  - El contenido de cada widget se arma en build time desde `lib/widgets.js` (`buildWidgets()`).
+- [x] **4.2 Crear `layouts/Sidebar.js`**
+  - Adaptado de la referencia (panameconomics/visiontres): renderiza los widgets según config, con `Link` interno, fechas con `formatDateTime` y soporte de items con `href`+`count` (categorías) o `articles` (autores/últimos).
+- [x] **4.3 Integrar layout de 2 columnas** — aplicado en home (`pages/index.js`), `/blog`, `/blog/page/[n]` y `/tags/*` vía `ListLayout` (`widgets` prop + `Sidebar` con `order` para que en móvil quede debajo). El sidebar se oculta mientras el usuario busca. `PostLayout` (posts) queda omitido a propósito: es opcional en el plan y en páginas de artículo el ancho conviene guardarlo para el contenido.
+- [x] **4.4 Widget de autores**: avatar + nombre + sus últimos `limit` artículos (linking a `/authors/[id]` pendiente de crear esas rutas — Fase 7.2; por ahora solo los artículos enlazan).
+- [x] **4.5 Widget de categorías**: conteo de artículos por sección (normaliza tags igual que `kebabCase`).
 
 ---
 
 ## Fase 5 — Nuevas secciones: Kanaime y Cultura
 
-- [ ] **5.1 Sección "Kanaime"** (turismo y naturaleza) — **deshabilitada hasta tener contenido**
-  - Agregar flag en `siteMetadata.js`: `sections: { kanaime: { enabled: false, ... }, cultura: { enabled: true } }`.
-  - Ruta propia `/kanaime` (o tag dedicado como las actuales secciones — decidir; la ruta propia da más libertad de layout).
-  - Mientras `enabled: false`: no aparece en el nav (`headerNavLinks.js`) ni en el home.
-- [ ] **5.2 Sección "Cultura"** — habilitada
-  - Ruta `/cultura` + entrada visible en nav y home.
-  - Mantener el mismo patrón de datos que las secciones actuales (`siteMetadata.pages` / tags).
-- [ ] **5.3 Home**: agregar Cultura a la barra de secciones; Kanaime oculto hasta activarse.
-- [ ] **5.4 SEO**: `PageSEO` por sección, incluirlas en el sitemap (`scripts/generate-sitemap.js`) solo si están habilitadas.
-- [ ] **5.5 Actualizar `data/headerNavLinks.js` y `siteMetadata.pages`** con el nuevo sistema de flags.
+- [x] **5.1 Sección "Kanaime"** (turismo y naturaleza) — **oculta hasta tener contenido**
+  - **Decisión**: mismo patrón tag-based que las secciones actuales (sin ruta propia) → `/tags/kanaime`, hereda layout, RSS y sitemap de `pages/tags/[tag].js`.
+  - Config central en `data/sections.js`: `{ title: 'KANAIME', tag: 'kanaime', requiresContent: true }`.
+  - **Visibilidad automática**: `next.config.js` lee `data/blog/*.mdx` al iniciar (build/dev) y filtra secciones con `requiresContent` sin artículos publicados; se inyecta como `NEXT_PUBLIC_SECTIONS` (server y client ven el mismo valor). No requiere tocar config al publicar el primer artículo (solo reiniciar dev/deploy).
+- [x] **5.2 Sección "Cultura"** — habilitada
+  - `{ title: 'CULTURA', tag: 'cultura' }` en `data/sections.js` (ya existía 1 artículo con ese tag).
+- [x] **5.3 Home**: la barra de secciones es ahora **global en el header** (`LayoutWrapper`, visible en todas las páginas, `hidden sm:flex`) y también en el menú móvil (`MobileNav`) + barra fija con scroll. La barra duplicada del home se eliminó.
+- [x] **5.4 SEO**: `/tags/<sección>` ya usa `TagSEO` + se genera `public/tags/<slug>/feed.xml` en build; el sitemap incluye `public/tags/**/*.xml`. Solo existen páginas/sitemaps de tags con contenido → Kanaime queda fuera automáticamente.
+- [x] **5.5 `siteMetadata.pages` eliminado** (reemplazado por `data/sections.js` como única fuente de verdad). `headerNavLinks.js` no cambia (las secciones se renderizan desde `lib/sections.js`).
 
 ---
 
 ## Fase 6 — Portada controlada por variable
 
-- [ ] **6.1 Nueva variable de frontmatter**: `featured: true` (y opcional `featuredOrder: 1` para desempatar)
+- [x] **6.1 Nueva variable de frontmatter**: `featured: true` (y opcional `featuredOrder: 1` para desempatar)
   - Hoy el home toma `posts[0]` (el más nuevo) como nota principal (`pages/index.js`).
   - Con la variable: **el artículo con `featured: true` sale en portada sin importar la fecha**.
-- [ ] **6.2 Lógica en `pages/index.js`**:
-  - Hero = primer `featured` (ordenado por `featuredOrder` si hay varios) → fallback al más reciente si ninguno.
-  - Slots siguientes (Card grid) = resto de `featured` primero, luego el resto por fecha.
-- [ ] **6.3 Validación**: si un post es `draft: true`, ignorar `featured`.
-- [ ] **6.4 Documentar** el nuevo frontmatter en `AGENTS.md` (sección "Writing content").
+  - `scripts/compose.js` pregunta por `featured` y solo escribe la línea si la respuesta es `yes` (frontmatter limpio).
+- [x] **6.2 Lógica en `pages/index.js`**:
+  - Hero = primer `featured` (ordenado por `featuredOrder`, menor primero; sin orden → después; empate → fecha) → fallback al más reciente si ninguno.
+  - Slots siguientes (Card grid) = resto de `featured` primero, luego el resto por fecha. La lista se reordena en `getStaticProps` (`[hero, ...restFeatured, ...rest]`).
+  - Bonus: hero/Card/Li ahora toleran posts sin `images` (fallback a bloque de texto / sin miniatura) — antes crasheaba con `images[0]`.
+- [x] **6.3 Validación**: si un post es `draft: true`, ignorar `featured`.
+  - Gratis: `getAllFilesFrontMatter` ya excluye `draft: true` antes de llegar al home.
+- [x] **6.4 Documentar** el nuevo frontmatter en `AGENTS.md` (sección "Writing content").
+
+---
+
+## UI — Barra fixed panameconomics + composición de portada (2026-09)
+
+- [x] **Barra fixed en todas las páginas** (`components/LayoutWrapper.js`): siempre visible arriba con `siteMetadata.topTags` (8 tags → `/tags/<slug>`), nav (Etiquetas/Nosotros), ThemeSwitch y menú móvil. El logo pequeño aparece en la barra al hacer scroll >200px (igual que la referencia: el header grande se va de vista). El header conserva solo el logo grande + barra de secciones; `pt-16` en el layout libera la barra. Los controles NO se duplican en el header (viven solo en la barra, como panameconomics). Menú móvil: pasa a `md:hidden` y agrega grupo de `topTags`.
+- [x] **Composición de portada copiada de panameconomics** (`pages/index.js`): hero `Box` a todo el ancho → sidebar (izquierda en desktop) + columna de `Box` apilados (`slice(1, maxDisplay)`, inicial 12) + botón **"Mostrar más →"** (+4). Se eliminan las Cards y las filas `Li` del home.
+- [x] **Proporciones alineadas a la referencia**: sidebar `md:w-1/3` + contenido `md:w-2/3` en home y `ListLayout` (corrige un desajuste `lg:w-3/4` + `lg:w-1/3` = 108% que rompía `/blog` en desktop).
+- Fechas en el home: la lista ya no muestra fecha (como la referencia); siguen en `/blog`, tags y artículos.
+
+> Nota: el botón "Mostrar más" es carga incremental manual (así lo hace panameconomics), **no** es el scroll infinito automático de la Fase 7, que sigue aplazado.
 
 ---
 
 ## Fase 7 — Paginación por scroll infinito
+
+> **Aplazada** (decisión del usuario, 2026-09): el scroll infinito queda para el futuro.
 
 - [ ] **7.1 Home y listados**: reemplazar la paginación tradicional por scroll infinito
   - Enfoque estático recomendado: enviar todos los `frontMatter` vía `getStaticProps` y renderizar de a N (ej. 10) con `IntersectionObserver`.

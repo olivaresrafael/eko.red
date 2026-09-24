@@ -1,89 +1,113 @@
+import { useState } from 'react'
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
-import Card from '@/components/Card'
 import Box from '@/components/Box'
-import Image from '@/components/Image'
 import siteMetadata from '@/data/siteMetadata'
-import { getAllFilesFrontMatter } from '@/lib/mdx'
-import { formatDate, textCleaner } from '@/lib/utils'
+import { dateSortDesc, getAllFilesFrontMatter } from '@/lib/mdx'
+import { buildWidgets } from '@/lib/widgets'
+import Sidebar from '@/layouts/Sidebar'
 
 import NewsletterForm from '@/components/NewsletterForm'
 
-const MAX_DISPLAY = 8
-
 export async function getStaticProps() {
+  // getAllFilesFrontMatter ya excluye borradores → un `featured: true`
+  // con `draft: true` nunca llega aquí (Fase 6.3)
   const posts = await getAllFilesFrontMatter('blog')
+  const widgets = await buildWidgets()
 
-  return { props: { posts } }
+  // Portada (Fase 6): los artículos con `featured: true` encabezan el home
+  // aunque no sean los más nuevos. Orden entre ellos por `featuredOrder`
+  // (menor primero; si falta, después) y, en empate, por fecha. Sin ninguno,
+  // manda lo más reciente (orden cronológico normal).
+  const featured = posts
+    .filter((post) => post.featured === true)
+    .sort((a, b) => {
+      const orderA = a.featuredOrder ?? Infinity
+      const orderB = b.featuredOrder ?? Infinity
+      if (orderA !== orderB) return orderA - orderB
+      return dateSortDesc(a.date, b.date)
+    })
+
+  // Hero = primer featured (o el más reciente si no hay); el resto de
+  // featured va en los slots siguientes y después el resto por fecha
+  const hero = featured[0] || posts[0]
+  const restFeatured = featured.filter((post) => post.slug !== hero.slug)
+  const rest = posts.filter(
+    (post) => post.slug !== hero.slug && !restFeatured.some((f) => f.slug === post.slug)
+  )
+  const ordered = [hero, ...restFeatured, ...rest]
+
+  return { props: { posts: ordered, widgets } }
 }
 
-export default function Home({ posts }) {
+export default function Home({ posts, widgets }) {
+  const [maxDisplay, setMaxDisplay] = useState(12)
+
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="grid justify-items-center sm:grid-cols-2 md:grid-cols-4">
-          {siteMetadata.pages.map((line) => (
-            <a
-              key={line}
-              href={`/tags/${textCleaner(line.toLowerCase())}`}
-              className="w-64 p-1 text-center text-xl font-semibold text-gray-900 hover:text-primary-600 dark:text-gray-100 dark:hover:text-primary-600 sm:p-4"
-            >
-              {line}
-            </a>
-          ))}
-        </div>
-        <div className="container py-12">
+        <div className="container py-8">
+          {/* Nota principal (Box a todo el ancho) */}
           <div className="-m-4 flex flex-wrap">
-            <Box
-              title={posts[0].title}
-              description={posts[0].summary}
-              imgSrc={posts[0].images[0]}
-              href={`/blog/${posts[0].slug}`}
-              tags={posts[0].tags}
-            />
-          </div>
-          <div className="-m-4 flex flex-wrap">
-            {posts.slice(1, 3).map((d) => (
-              <Card
-                key={d.title}
-                title={d.title}
-                description={d.summary}
-                imgSrc={d.images[0]}
-                href={`/blog/${d.slug}`}
-                tags={d.tags}
+            {posts[0].images && posts[0].images.length > 0 ? (
+              <Box
+                title={posts[0].title}
+                description={posts[0].summary}
+                imgSrc={posts[0].images[0]}
+                href={`/blog/${posts[0].slug}`}
+                tags={posts[0].tags}
               />
-            ))}
+            ) : (
+              <div className="md p-4 md:w-full" style={{ maxWidth: '100%' }}>
+                <div className="rounded-md border-2 border-gray-200 border-opacity-60 p-6 dark:border-gray-700">
+                  <div className="flex flex-wrap">
+                    {posts[0].tags.map((tag) => (
+                      <Tag key={tag} text={tag} />
+                    ))}
+                  </div>
+                  <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
+                    <Link href={`/blog/${posts[0].slug}`} aria-label={`Link to ${posts[0].title}`}>
+                      {posts[0].title}
+                    </Link>
+                  </h2>
+                  <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">
+                    {posts[0].summary}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+          {/* Sidebar (izquierda en desktop) + lista de artículos en Box —
+              composición idéntica a panameconomics */}
+          <div className="-m-4 flex flex-wrap">
+            <Sidebar widgets={widgets} className="order-2 md:order-1" />
+            <div className="order-1 w-full py-4 md:order-2 md:w-2/3">
+              {posts.slice(1, maxDisplay).map((d) => (
+                <Box
+                  key={d.slug}
+                  title={d.title}
+                  description={d.summary}
+                  imgSrc={d.images && d.images.length > 0 ? d.images[0] : null}
+                  href={`/blog/${d.slug}`}
+                  tags={d.tags}
+                />
+              ))}
+            </div>
           </div>
         </div>
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && 'No posts found.'}
-          {posts.slice(3, MAX_DISPLAY).map((frontMatter) => {
-            const { slug, date, title, summary, tags, images } = frontMatter
-            return (
-              <Li
-                key={slug}
-                slug={slug}
-                date={date}
-                title={title}
-                summary={summary}
-                tags={tags}
-                image={images[0]}
-              />
-            )
-          })}
-        </ul>
       </div>
-      {posts.length > MAX_DISPLAY && (
+      {posts.length > maxDisplay && (
         <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="all posts"
+          <button
+            type="button"
+            onClick={() => setMaxDisplay(maxDisplay + 4)}
+            className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
+            aria-label="Mostrar más artículos"
           >
-            Todos los posts &rarr;
-          </Link>
+            Mostrar más &rarr;
+          </button>
         </div>
       )}
       {siteMetadata.newsletter.enabled && siteMetadata.newsletter.provider !== '' && (
@@ -92,63 +116,5 @@ export default function Home({ posts }) {
         </div>
       )}
     </>
-  )
-}
-
-function Li({ slug, date, title, summary, tags, image }) {
-  return (
-    <li key={slug} className="py-12">
-      <article>
-        <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-start xl:space-y-0">
-          <div className="mx-3">
-            <Link href={`/blog/${slug}`} aria-label={`Link to ${title}`}>
-              <Image
-                alt={title}
-                src={image}
-                className="object-cover object-center md:h-36 lg:h-48"
-                layout="responsive"
-                width={250}
-                height={180}
-              />
-            </Link>
-          </div>
-
-          <div className="space-y-5 xl:col-span-3">
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                  <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
-                    {title}
-                  </Link>
-                </h2>
-                <dl className="mt-0">
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-xs font-light leading-6 text-gray-300 dark:text-gray-100">
-                    <time dateTime={date}>{formatDate(date)}</time>
-                  </dd>
-                </dl>
-                <div className="flex flex-wrap">
-                  {tags.map((tag) => (
-                    <Tag key={tag} text={tag} />
-                  ))}
-                </div>
-              </div>
-
-              <div className="prose max-w-none text-gray-500 dark:text-gray-400">{summary}</div>
-            </div>
-
-            <div className="text-base font-medium leading-6">
-              <Link
-                href={`/blog/${slug}`}
-                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label={`Read "${title}"`}
-              >
-                Leer más &rarr;
-              </Link>
-            </div>
-          </div>
-        </div>
-      </article>
-    </li>
   )
 }

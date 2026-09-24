@@ -2,9 +2,21 @@ const siteMetadata = {
   title: 'EKO Red - Revista digital - Economía, política y mundo digital',
   author: 'EKO Red',
   headerTitle: 'EKO Red',
+  // Tags de la barra fixed superior y del menú móvil (estilo panameconomics).
+  // Enlazan a /tags/<slug>: cada tag debe tener ≥1 artículo publicado o el
+  // enlace apuntaría a una página inexistente.
+  topTags: [
+    'Venezuela',
+    'Latinoamérica',
+    'Crimen',
+    'Ciberseguridad',
+    'Economía',
+    'Política',
+    'Mundo',
+    'Cultura',
+  ],
   description:
     'Revista digital y noticias de economía, política, cultura, mundo digital, ciberseguridad, crimen organizado, investigación.\n Promovemos la libertad de expresión, económica y social.',
-  pages: ['MUNDO', 'LATINOAMÉRICA', 'CRIMEN', 'CIBERSEGURIDAD'],
   language: 'es',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://eko.red',

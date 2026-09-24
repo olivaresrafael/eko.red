@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import Link from '@/components/Link'
+import Image from '@/components/Image'
 import { PageSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
 import Box from '@/components/Box'
 import siteMetadata from '@/data/siteMetadata'
 import { dateSortDesc, getAllFilesFrontMatter } from '@/lib/mdx'
-import { buildWidgets } from '@/lib/widgets'
+import { buildWidgets, buildPortadaWidgets } from '@/lib/widgets'
 import Sidebar from '@/layouts/Sidebar'
 
 import NewsletterForm from '@/components/NewsletterForm'
@@ -29,19 +30,28 @@ export async function getStaticProps() {
       return dateSortDesc(a.date, b.date)
     })
 
-  // Hero = primer featured (o el más reciente si no hay); el resto de
-  // featured va en los slots siguientes y después el resto por fecha
-  const hero = featured[0] || posts[0]
+  // Hero = primer featured (o el más reciente) SIN `excludeHero`. Esa marca
+  // solo evita el layout del primer artículo: el post sigue en la lista del
+  // home, sus widgets y las secciones (2026-09-24).
+  const hero =
+    featured.find((post) => post.excludeHero !== true) ||
+    posts.find((post) => post.excludeHero !== true) ||
+    posts[0]
   const restFeatured = featured.filter((post) => post.slug !== hero.slug)
   const rest = posts.filter(
     (post) => post.slug !== hero.slug && !restFeatured.some((f) => f.slug === post.slug)
   )
   const ordered = [hero, ...restFeatured, ...rest]
 
-  return { props: { posts: ordered, widgets } }
+  // Widgets de portada (data/portadaWidgets.js): bloques bajo la nota principal
+  const portadaWidgets = buildPortadaWidgets(posts, hero.slug)
+
+  return {
+    props: { posts: ordered, widgets, portadaWidgets },
+  }
 }
 
-export default function Home({ posts, widgets }) {
+export default function Home({ posts, widgets, portadaWidgets }) {
   const [maxDisplay, setMaxDisplay] = useState(12)
 
   return (
@@ -79,6 +89,67 @@ export default function Home({ posts, widgets }) {
               </div>
             )}
           </div>
+          {/* Widgets de portada (data/portadaWidgets.js): bloques bajo la
+              nota principal, en el orden del config; cada uno se llena por
+              tag o por lista manual de artículos */}
+          {portadaWidgets.map((widget) => (
+            <div
+              key={widget.id}
+              className="mt-4 rounded-md border-2 border-gray-200 border-opacity-60 p-4 dark:border-gray-700"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <h2 className="text-xl font-bold uppercase tracking-wide text-gray-900 dark:text-gray-100">
+                  {widget.title}
+                </h2>
+                {widget.href && (
+                  <Link
+                    href={widget.href}
+                    className="text-sm font-medium text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500"
+                  >
+                    Ver toda la sección &rarr;
+                  </Link>
+                )}
+              </div>
+              <div className="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
+                {widget.articles.map((article) => (
+                  <div
+                    key={article.slug}
+                    className="flex flex-col space-y-3 py-3 first:py-0 sm:flex-row sm:space-x-4 sm:space-y-0"
+                  >
+                    {article.images && article.images[0] && (
+                      <Link
+                        href={`/blog/${article.slug}`}
+                        aria-label={`Link to ${article.title}`}
+                        className="w-full shrink-0 sm:w-64"
+                      >
+                        <Image
+                          alt={article.title}
+                          src={article.images[0]}
+                          width={700}
+                          height={466}
+                          layout="responsive"
+                          className="rounded-md object-cover"
+                        />
+                      </Link>
+                    )}
+                    <div>
+                      <h3 className="text-2xl font-bold leading-8 tracking-tight">
+                        <Link
+                          href={`/blog/${article.slug}`}
+                          className="text-gray-900 dark:text-gray-100"
+                        >
+                          {article.title}
+                        </Link>
+                      </h3>
+                      <p className="prose mt-2 max-w-none text-gray-500 dark:text-gray-400">
+                        {article.summary}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
           {/* Sidebar (izquierda en desktop) + lista de artículos en Box —
               composición idéntica a panameconomics */}
           <div className="-m-4 flex flex-wrap">

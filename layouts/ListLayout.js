@@ -1,4 +1,5 @@
 import Link from '@/components/Link'
+import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { useState } from 'react'
@@ -63,17 +64,33 @@ export default function ListLayout({
             <ul>
               {!filteredBlogPosts.length && 'No posts found.'}
               {displayPosts.map((frontMatter) => {
-                const { slug, date, dateRaw, title, summary, tags } = frontMatter
+                const { slug, date, dateRaw, title, summary, tags, images } = frontMatter
                 return (
                   <li key={slug} className="py-4">
-                    <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-start xl:space-y-0">
-                      <dl>
-                        <dt className="sr-only">Published on</dt>
-                        <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                          <time dateTime={date}>{formatDateTime(date, dateRaw)}</time>
-                        </dd>
-                      </dl>
-                      <div className="space-y-3 xl:col-span-3">
+                    <article className="flex flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
+                      {images && images[0] && (
+                        <Link
+                          href={`/blog/${slug}`}
+                          aria-label={`Link to ${title}`}
+                          className="w-full shrink-0 sm:w-48"
+                        >
+                          <Image
+                            alt={title}
+                            src={images[0]}
+                            width={700}
+                            height={466}
+                            layout="responsive"
+                            className="rounded-md border border-gray-200 object-cover dark:border-gray-700"
+                          />
+                        </Link>
+                      )}
+                      <div className="space-y-2">
+                        <dl>
+                          <dt className="sr-only">Published on</dt>
+                          <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                            <time dateTime={date}>{formatDateTime(date, dateRaw)}</time>
+                          </dd>
+                        </dl>
                         <div>
                           <h3 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link

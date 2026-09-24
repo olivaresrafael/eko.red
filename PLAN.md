@@ -118,6 +118,21 @@
 
 ---
 
+## UI — Ajustes de portada, tags y widgets (2026-09-24)
+
+- [x] **Logo centrado** en el header (`components/LayoutWrapper.js`: `justify-center` en el header; el logo pequeño de la barra fixed al hacer scroll queda a la izquierda como en la referencia).
+- [x] **Fotos en los listados de artículos** (`layouts/ListLayout.js`): miniatura con `images[0]` a la izquierda de cada fila (responsive, con fallback si el post no tiene imagen). Aplica a `/blog`, `/blog/page/[n]` y `/tags/*` (misma función).
+- [x] **Páginas de tags sin sidebar** (`pages/tags/[tag].js`): ya no se pasa `widgets` a `ListLayout` (ListLayout ocupa el ancho completo). `/blog` conserva su sidebar.
+- [x] **Botón de búsqueda global (lupa en la barra fixed)**: nuevo `components/SearchButton.js` + `pages/api/search.js` (GET, solo frontmatter liviano, `Cache-Control`). Abre un overlay con filtro instantáneo sobre título/resumen/tags; resultados con foto y fecha; cierra con Escape o el botón ✕; el índice se descarga una sola vez (caché en módulo del cliente).
+- [x] **Widgets de portada genéricos** (`data/portadaWidgets.js` + `buildPortadaWidgets()` en `lib/widgets.js` + bloque en `pages/index.js`): reemplazan al bloque "Cultura" hardcodeado. Cada widget lleva `title` y se llena con **`tag`** (artículos con esa etiqueta, más recientes; excluye el hero actual para no repetirlo) **o `posts`** (lista manual de slugs, en el orden dado; gana sobre `tag`). Opcionales `limit` (default 3 en tag / todos en manual), `min` (default 1) y `href` (default `/tags/<tag>` en modo tag, `null` = sin enlace). El orden del array = orden de aparición; `enabled: false` oculta sin borrar. Se renderizan debajo de la nota principal, apilados con foto + título + resumen por fila.
+  - Widget inicial: **Cultura** (`tag: cultura`, `min: 2`, `limit: 3`, `href: /tags/cultura`) — umbral ≥2 artículos confirmado por el usuario (resuelve la nota pendiente del ">1 vs >2"). Ejemplo con lista manual queda comentado en el config.
+- [x] **Widget "Nuestros autores"**: espacio entre foto de perfil y nombre (el margen en el `<img>` de `next/image` no aplica porque va dentro del wrapper: ahora el `mr-4` vive en un `<span>` contenedor) y **orden fijo** vía `order` en `data/widgets.js`: Francisco Olivares → Marcos Tarre → Henry Alvarez → Rafael Olivares (autores fuera del orden, al final).
+- [x] **Widget "Cultura"** inmediatamente después de "Nuestros autores": nuevo filtro `tag` en el tipo `latest` de `data/widgets.js`/`lib/widgets.js`; se oculta solo si no hay artículos con ese tag (el umbral de >2 aplica únicamente a la sección de portada).
+- [x] **Variable `excludeHero`** (renombrada/re-acotada de `excludeHome`: el usuario pidió excluir **solo del layout del primer artículo**, no del home completo) (`pages/index.js`, prompt en `compose.js`, doc en `AGENTS.md`): el artículo no puede ser el hero aunque sea `featured` o el más nuevo, pero sí aparece en la lista del home, widgets de portada, `/blog`, tags, RSS, sitemap y búsqueda. Aplicada a `marcos-tarre-sobre-beltza.mdx` — motivo: `featured: false` no excluía, siendo el más nuevo ganaba el hero por fallback. La exclusión de `buildWidgets()` se revirtió (los widgets del sidebar vuelven a mostrar todos los artículos).
+- Verificación: `yarn lint` limpio + `yarn build` OK; HTML comprobado (orden de autores, `/tags/*` sin `<aside>`, miniaturas presentes, lupa en home y posts, `/api/search` compilada, widgets de portada).
+
+---
+
 ## Fase 7 — Paginación por scroll infinito
 
 > **Aplazada** (decisión del usuario, 2026-09): el scroll infinito queda para el futuro.

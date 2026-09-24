@@ -8,6 +8,7 @@ import Link from './Link'
 import SectionContainer from './SectionContainer'
 import Footer from './Footer'
 import MobileNav from './MobileNav'
+import SearchButton from './SearchButton'
 import ThemeSwitch from './ThemeSwitch'
 import { useTheme } from 'next-themes'
 
@@ -62,6 +63,7 @@ const LayoutWrapper = ({ children }) => {
               </Link>
             ))}
           </div>
+          <SearchButton />
           <ThemeSwitch />
           <MobileNav />
         </div>
@@ -70,11 +72,11 @@ const LayoutWrapper = ({ children }) => {
       <SectionContainer>
         {/* pt-16 deja libre la barra fixed (~60px) */}
         <div className="flex h-screen flex-col justify-between pt-16">
-          <header className="flex items-center justify-between">
+          <header className="flex items-center justify-center">
             <div>
               <Link href="/" aria-label={siteMetadata.headerTitle}>
-                <div className="flex items-center justify-between">
-                  <div className="mr-3">
+                <div className="flex items-center justify-center">
+                  <div>
                     <Image
                       src={`/static/images/logo_${resolvedTheme}.svg`}
                       alt={siteMetadata.headerTitle}

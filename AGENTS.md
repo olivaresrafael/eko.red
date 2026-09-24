@@ -31,7 +31,8 @@ Install dependencies with `yarn` (yarn.lock is authoritative; do not use npm).
 ## Project structure
 
 - `pages/` — routes (Pages Router): `index.js`, `blog/[...slug].js`, `tags/`,
-  `about.js`, `404.js`, `api/` (newsletter providers + `api/auth/[...nextauth].js`)
+  `about.js`, `404.js`, `api/` (newsletter providers + `api/auth/[...nextauth].js`
+  + `api/search.js` = índice liviano del buscador client-side)
 - `components/` — shared UI (`Card`, `Box`, `SEO`, `LayoutWrapper`, `MDXComponents`, ...)
 - `layouts/` — page templates: `PostLayout`, `PostSimple`, `ListLayout`,
   `AboutLayout`, `AuthorLayout`, `OrganizationLayout`, `Sidebar`
@@ -50,7 +51,10 @@ Install dependencies with `yarn` (yarn.lock is authoritative; do not use npm).
     as `NEXT_PUBLIC_SECTIONS` (restart the server after publishing the first
     post of a new section)
   - `widgets.js` — sidebar widget config (`id`, `type`, `title`, `enabled`,
-    `limit`, `includeImg`); rendered by `layouts/Sidebar.js`
+    `limit`, `includeImg`; `tag` filtra el tipo `latest` a una etiqueta,
+    `order` fija el orden del tipo `authors` por slug; array order = display
+    order; rendered by `layouts/Sidebar.js` — used on home and `/blog` only,
+    never on `/tags/*`)
   - `blog/*.mdx` — posts
   - `authors/*.md` — author profiles
 - `scripts/` — `compose.js` (new post), `generate-sitemap.js`, `next-remote-watch.js`

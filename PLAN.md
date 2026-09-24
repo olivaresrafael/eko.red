@@ -118,6 +118,19 @@
 
 ---
 
+## UI — Ajustes de portada, tags y widgets (2026-09-24)
+
+- [x] **Logo centrado** en el header (`components/LayoutWrapper.js`: `justify-center` en el header; el logo pequeño de la barra fixed al hacer scroll queda a la izquierda como en la referencia).
+- [x] **Fotos en los listados de artículos** (`layouts/ListLayout.js`): miniatura con `images[0]` a la izquierda de cada fila (responsive, con fallback si el post no tiene imagen). Aplica a `/blog`, `/blog/page/[n]` y `/tags/*` (misma función).
+- [x] **Páginas de tags sin sidebar** (`pages/tags/[tag].js`): ya no se pasa `widgets` a `ListLayout` (ListLayout ocupa el ancho completo). `/blog` conserva su sidebar.
+- [x] **Botón de búsqueda global (lupa en la barra fixed)**: nuevo `components/SearchButton.js` + `pages/api/search.js` (GET, solo frontmatter liviano, `Cache-Control`). Abre un overlay con filtro instantáneo sobre título/resumen/tags; resultados con foto y fecha; cierra con Escape o el botón ✕; el índice se descarga una sola vez (caché en módulo del cliente).
+- [x] **Sección Cultura en la portada** (`pages/index.js`): justo debajo de la nota principal, 1 artículo destacado de Cultura con foto + link "Ver toda la sección →" a `/tags/cultura`. **Solo se renderiza con más de 2 artículos publicados con tag `cultura`** (hoy hay 1 → permanece oculta hasta llegar a 3). Verificado con 2 posts temporales (aparece, destacado = el más reciente) y tras borrarlos (desaparece).
+- [x] **Widget "Nuestros autores"**: espacio entre foto de perfil y nombre (el margen en el `<img>` de `next/image` no aplica porque va dentro del wrapper: ahora el `mr-4` vive en un `<span>` contenedor) y **orden fijo** vía `order` en `data/widgets.js`: Francisco Olivares → Marcos Tarre → Henry Alvarez → Rafael Olivares (autores fuera del orden, al final).
+- [x] **Widget "Cultura"** inmediatamente después de "Nuestros autores": nuevo filtro `tag` en el tipo `latest` de `data/widgets.js`/`lib/widgets.js`; se oculta solo si no hay artículos con ese tag (el umbral de >2 aplica únicamente a la sección de portada).
+- Verificación: `yarn lint` limpio + `yarn build` OK; HTML comprobado (orden de autores, `/tags/*` sin `<aside>`, miniaturas presentes, lupa en home y posts, `/api/search` compilada, sección Cultura on/off con el umbral).
+
+---
+
 ## Fase 7 — Paginación por scroll infinito
 
 > **Aplazada** (decisión del usuario, 2026-09): el scroll infinito queda para el futuro.

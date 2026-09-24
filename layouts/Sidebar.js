@@ -25,14 +25,18 @@ function Widget({ widget }) {
       {widget.content.map((item, index) => (
         <div key={item.href || item.title || index} className="w-full pt-4">
           <div className="flex items-center">
+            {/* Espacio explícito entre avatar y nombre (next/image ignora
+                el margen puesto en el img: va en el contenedor) */}
             {item.imgSrc && (
-              <Image
-                src={item.imgSrc}
-                alt={item.title || 'avatar'}
-                width={48}
-                height={48}
-                className="mr-3 h-12 w-12 rounded-full object-cover"
-              />
+              <span className="mr-4 inline-flex shrink-0">
+                <Image
+                  src={item.imgSrc}
+                  alt={item.title || 'avatar'}
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 rounded-full object-cover"
+                />
+              </span>
             )}
             {item.href ? (
               <Link

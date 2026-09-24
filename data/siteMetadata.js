@@ -2,9 +2,21 @@ const siteMetadata = {
   title: 'EKO Red - Revista digital - Economía, política y mundo digital',
   author: 'EKO Red',
   headerTitle: 'EKO Red',
+  // Tags de la barra fixed superior y del menú móvil (estilo panameconomics).
+  // Enlazan a /tags/<slug>: cada tag debe tener ≥1 artículo publicado o el
+  // enlace apuntaría a una página inexistente.
+  topTags: [
+    'Venezuela',
+    'Latinoamérica',
+    'Crimen',
+    'Ciberseguridad',
+    'Economía',
+    'Política',
+    'Mundo',
+    'Cultura',
+  ],
   description:
     'Revista digital y noticias de economía, política, cultura, mundo digital, ciberseguridad, crimen organizado, investigación.\n Promovemos la libertad de expresión, económica y social.',
-  pages: ['MUNDO', 'LATINOAMÉRICA', 'CRIMEN', 'CIBERSEGURIDAD'],
   language: 'es',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://eko.red',
@@ -34,8 +46,17 @@ const siteMetadata = {
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
     // Please add your .env file and modify it according to your selection
+    // TEMPORALMENTE DESHABILITADA (la cuenta no funciona) → para reactivar: enabled: true
+    enabled: false,
     title: 'Suscríbete a la Newsletter',
     provider: 'emailoctopus',
+  },
+  // Botón de apoyo al sitio. Deja url vacía ('') para ocultarlo.
+  // Futuro: https://www.buymeacoffee.com/<tu-usuario>
+  support: {
+    provider: 'buymeacoffee',
+    url: '',
+    text: 'Buy Me a Coffee',
   },
   comment: {
     // If you want to use a commenting system other than giscus you have to add it to the

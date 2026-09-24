@@ -2,6 +2,54 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const fs = require('fs')
+const path = require('path')
+const matter = require('gray-matter')
+const sectionsConfig = require('./data/sections')
+
+// Mismo criterio de slug que lib/utils/kebabCase (sin tildes, minúsculas)
+const normalizeTag = (str) =>
+  String(str)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+
+// Filtra las secciones con requiresContent que aún no tienen artículos
+// (ej. Kanaime oculta hasta publicar el primer artículo con tag 'kanaime').
+// Se ejecuta al iniciar el build/dev server y el resultado se inyecta al
+// bundle como NEXT_PUBLIC_SECTIONS (server y client ven el mismo valor).
+function getVisibleSections() {
+  let files = []
+  try {
+    files = fs
+      .readdirSync(path.join(__dirname, 'data', 'blog'))
+      .filter((file) => /\.mdx?$/.test(file))
+  } catch (error) {
+    return sectionsConfig.filter((section) => !section.requiresContent)
+  }
+
+  const usedTags = new Set()
+  for (const file of files) {
+    try {
+      const { data } = matter(fs.readFileSync(path.join(__dirname, 'data', 'blog', file), 'utf8'))
+      if (data.draft === true) continue
+      ;(Array.isArray(data.tags) ? data.tags : []).forEach((tag) =>
+        usedTags.add(normalizeTag(tag))
+      )
+    } catch (error) {
+      // Frontmatter inválido: ignorar el archivo
+    }
+  }
+
+  return sectionsConfig.filter(
+    (section) => !section.requiresContent || usedTags.has(section.tag)
+  )
+}
+
+
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self' https://vitals.vercel-insights.com/v1/vitals;
@@ -55,6 +103,9 @@ const securityHeaders = [
 
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_SECTIONS: JSON.stringify(getVisibleSections()),
+  },
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   eslint: {
     dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],

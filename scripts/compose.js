@@ -73,6 +73,11 @@ const genFrontMatter = (answers) => {
     frontMatter = frontMatter + '\n' + 'featured: true'
   }
 
+  // Fuera del layout del primer artículo del home (prioridad sobre featured)
+  if (answers.excludeHero === 'yes') {
+    frontMatter = frontMatter + '\n' + 'excludeHero: true'
+  }
+
   frontMatter = frontMatter + '\n---'
 
   return frontMatter
@@ -117,6 +122,13 @@ inquirer
     {
       name: 'featured',
       message: 'Set post as featured (nota principal del home)?',
+      type: 'list',
+      choices: ['no', 'yes'],
+      default: 'no',
+    },
+    {
+      name: 'excludeHero',
+      message: 'Excluir del layout del primer artículo del home (aparece en listas)?',
       type: 'list',
       choices: ['no', 'yes'],
       default: 'no',

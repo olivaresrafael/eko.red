@@ -55,6 +55,12 @@ Install dependencies with `yarn` (yarn.lock is authoritative; do not use npm).
     `order` fija el orden del tipo `authors` por slug; array order = display
     order; rendered by `layouts/Sidebar.js` — used on home and `/blog` only,
     never on `/tags/*`)
+  - `portadaWidgets.js` — widgets under the home hero (`id`, `title`,
+    `enabled`, `limit`, `min`; fill with `tag` OR a manual `posts` slug list —
+    manual wins; `href` = "Ver toda la sección" link, default `/tags/<tag>` in
+    tag mode, `null` hides it; array order = display order; built by
+    `buildPortadaWidgets()` in `lib/widgets.js`, rendered only by
+    `pages/index.js`)
   - `blog/*.mdx` — posts
   - `authors/*.md` — author profiles
 - `scripts/` — `compose.js` (new post), `generate-sitemap.js`, `next-remote-watch.js`
@@ -95,6 +101,7 @@ authors: ['author-id'] # matches data/authors/<author-id>.md
 layout: PostLayout # optional; defaults to PostLayout
 featured: true # optional; homepage hero regardless of date (ignored if draft: true)
 featuredOrder: 1 # optional; tie-break between multiple featured (lower = first)
+excludeHero: true # optional; published but never shown as the home hero
 canonicalUrl: '' # optional
 ---
 ```
@@ -103,6 +110,11 @@ canonicalUrl: '' # optional
   newest: hero = first `featured` (by `featuredOrder`, then date), the rest of
   `featured` follow in the card slots, then the rest chronologically. If no
   post is featured, the newest is the hero. Drafts are always ignored.
+  `node scripts/compose.js` prompts for it.
+
+- `excludeHero: true` keeps the post out of the home hero (the first-article
+  layout) even if it is featured or the newest, but it still appears in the
+  home lists, portada widgets, `/blog`, tags, RSS, sitemap and search.
   `node scripts/compose.js` prompts for it.
 
 - Author profiles: `data/authors/<id>.md` with frontmatter

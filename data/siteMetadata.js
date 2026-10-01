@@ -26,7 +26,7 @@ const siteMetadata = {
   socialBanner: '/static/images/ekored-card.png',
   email: 'info@eko.red',
   github: 'https://github.com/rafaolivares',
-  twitter: 'https://twitter.com/ekopuntored',
+  twitter: 'https://x.com/ekopuntored',
   facebook: 'https://facebook.com/ekopuntored',
   youtube: 'https://youtube.com/ekopuntored',
   linkedin: 'https://www.linkedin.com/ekopuntored',
@@ -59,11 +59,15 @@ const siteMetadata = {
     text: 'Buy Me a Coffee',
   },
   comment: {
+    // Interruptor maestro (patrón newsletter): false = ningún artículo muestra
+    // comentarios ni el botón de scroll a comentarios. Para reactivar: true
+    // (y tener las NEXT_PUBLIC_GISCUS_* en .env.local / Vercel).
+    enabled: false,
     // If you want to use a commenting system other than giscus you have to add it to the
     // content security policy in the `next.config.js` file.
     // Select a provider and use the environment variables associated to it
     // https://vercel.com/docs/environment-variables
-    provider: 'giscus', // supported providers: giscus, utterances, disqus
+    provider: 'giscus', // supported providers: giscus
     giscusConfig: {
       // Visit the link below, and follow the steps in the 'configuration' section
       // https://giscus.app/
@@ -88,22 +92,6 @@ const siteMetadata = {
       // please provide a link below to your custom theme css file.
       // example: https://giscus.app/themes/custom_example.css
       themeURL: '',
-    },
-    utterancesConfig: {
-      // Visit the link below, and follow the steps in the 'configuration' section
-      // https://utteranc.es/
-      repo: process.env.NEXT_PUBLIC_UTTERANCES_REPO,
-      issueTerm: '', // supported options: pathname, url, title
-      label: '', // label (optional): Comment 💬
-      // theme example: github-light, github-dark, preferred-color-scheme
-      // github-dark-orange, icy-dark, dark-blue, photon-dark, boxy-light
-      theme: '',
-      // theme when dark mode
-      darkTheme: '',
-    },
-    disqusConfig: {
-      // https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-      shortname: process.env.NEXT_PUBLIC_DISQUS_SHORTNAME,
     },
   },
 }

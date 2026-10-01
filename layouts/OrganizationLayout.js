@@ -21,10 +21,10 @@ export default function OrganizationLayout({ children, frontMatter }) {
               <SocialIcon kind="mail" href={website} />
               <SocialIcon kind="mail" href={`mailto:${email}`} />
               <SocialIcon kind="linkedin" href={linkedin} />
-              <SocialIcon kind="twitter" href={twitter} />
+              <SocialIcon kind="x" href={twitter} />
             </div>
           </div>
-          <div className="prose max-w-none pt-8 pb-8 dark:prose-dark xl:col-span-2">{children}</div>
+          <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">{children}</div>
         </div>
       </div>
     </>

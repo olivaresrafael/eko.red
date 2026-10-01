@@ -25,14 +25,15 @@ Install dependencies with `yarn` (yarn.lock is authoritative; do not use npm).
 - In client production builds, React is aliased to **Preact** (`next.config.js` webpack)
 - **Tailwind CSS 3** — `darkMode: 'class'`, custom `primary` color (yellow), Inter font
 - **MDX** content compiled with `mdx-bundler` (remark/rehype pipeline in `lib/mdx.js`)
-- `next-themes` (dark mode), `next-auth`, `giscus` (comments), Google Analytics,
+- `next-themes` (dark mode), `giscus` (comments — disabled via
+  `siteMetadata.comment.enabled = false`; no login/auth), Google Analytics,
   `emailoctopus` (newsletter), `next-share` (social buttons)
 
 ## Project structure
 
 - `pages/` — routes (Pages Router): `index.js`, `blog/[...slug].js`, `tags/`,
-  `about.js`, `404.js`, `api/` (newsletter providers + `api/auth/[...nextauth].js`
-  + `api/search.js` = índice liviano del buscador client-side)
+  `about.js`, `404.js`, `api/` (newsletter providers + `api/search.js`
+  = índice liviano del buscador client-side)
 - `components/` — shared UI (`Card`, `Box`, `SEO`, `LayoutWrapper`, `MDXComponents`, ...)
 - `layouts/` — page templates: `PostLayout`, `PostSimple`, `ListLayout`,
   `AboutLayout`, `AuthorLayout`, `OrganizationLayout`, `Sidebar`
@@ -58,9 +59,11 @@ Install dependencies with `yarn` (yarn.lock is authoritative; do not use npm).
   - `portadaWidgets.js` — widgets under the home hero (`id`, `title`,
     `enabled`, `limit`, `min`; fill with `tag` OR a manual `posts` slug list —
     manual wins; `href` = "Ver toda la sección" link, default `/tags/<tag>` in
-    tag mode, `null` hides it; array order = display order; built by
-    `buildPortadaWidgets()` in `lib/widgets.js`, rendered only by
-    `pages/index.js`)
+    tag mode, `null` hides it; `excludeFromFeed: true` keeps the widget's
+    articles out of the home feed and the hero — visible only inside that
+    widget on the home (`/blog`, tags, RSS, sidebar unaffected); array order =
+    display order; built by `buildPortadaWidgets()` in `lib/widgets.js`,
+    rendered only by `pages/index.js`)
   - `blog/*.mdx` — posts
   - `authors/*.md` — author profiles
 - `scripts/` — `compose.js` (new post), `generate-sitemap.js`, `next-remote-watch.js`
@@ -126,10 +129,11 @@ canonicalUrl: '' # optional
 ## Configuration notes
 
 - **Site config**: `data/siteMetadata.js` controls title, description, nav,
-  analytics IDs, comment provider, and newsletter provider. Change it there,
-  not in components.
+  analytics IDs, comments (`comment.enabled`, off by default) and newsletter
+  provider. Change it there, not in components.
 - **Environment**: copy `.env.example` to `.env.local`. Newsletter and comment
-  integrations need API keys (`NEXT_PUBLIC_GISCUS_*`, `EMAILOCTOPUS_*`, ...).
+  integrations need API keys (`NEXT_PUBLIC_GISCUS_*` only if comments are
+  enabled, `EMAILOCTOPUS_*`, ...).
 - **Security headers / CSP**: defined in `next.config.js`. If you add an
   external script or iframe (analytics, comments), you must extend the CSP
   there or it will be blocked.

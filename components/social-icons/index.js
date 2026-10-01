@@ -3,7 +3,7 @@ import Github from './github.svg'
 import Facebook from './facebook.svg'
 import Youtube from './youtube.svg'
 import Linkedin from './linkedin.svg'
-import Twitter from './twitter.svg'
+import X from './x.svg'
 import Tiktok from './tiktok.svg'
 import Instagram from './instagram.svg'
 import Website from './website.svg'
@@ -16,7 +16,7 @@ const components = {
   facebook: Facebook,
   youtube: Youtube,
   linkedin: Linkedin,
-  twitter: Twitter,
+  x: X,
   instagram: Instagram,
   tiktok: Tiktok,
   website: Website,

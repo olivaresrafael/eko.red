@@ -18,6 +18,9 @@
 //              (default 1)
 //  - href    → enlace "Ver toda la sección →" (default en modo tag:
 //              /tags/<tag>; con `href: null` no se muestra enlace)
+//  - excludeFromFeed → true = los artículos del widget NO aparecen en el feed
+//              regular del home ni como hero; en el home solo se ven dentro
+//              de este widget (/blog, tags, RSS y sidebar sin cambios)
 //
 // Pon enabled: false para ocultar un widget sin borrarlo.
 // El orden del array es el orden de aparición en la portada.
@@ -38,6 +41,7 @@ const portadaWidgets = [
   //   posts: ['mi-primer-post', 'otro-post'],
   //   enabled: true,
   //   href: null,
+  //   excludeFromFeed: true, // opcional: fuera del feed y del hero del home
   // },
 ]
 

@@ -4,7 +4,6 @@ import 'katex/dist/katex.css'
 
 import '@fontsource/inter/variable-full.css'
 
-import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 
@@ -18,7 +17,7 @@ import { ClientReload } from '@/components/ClientReload'
 const isDevelopment = process.env.NODE_ENV === 'development'
 const isSocket = process.env.SOCKET
 
-export default function App({ Component, pageProps: { session, ...pageProps } }) {
+export default function App({ Component, pageProps }) {
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <Head>
@@ -28,11 +27,9 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
       <Analytics />
       <AdSense />
       <CookieConsent />
-      <SessionProvider session={session}>
-        <LayoutWrapper>
-          <Component {...pageProps} />
-        </LayoutWrapper>
-      </SessionProvider>
+      <LayoutWrapper>
+        <Component {...pageProps} />
+      </LayoutWrapper>
     </ThemeProvider>
   )
 }

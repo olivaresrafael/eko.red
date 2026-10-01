@@ -6,7 +6,7 @@ import Tag from '@/components/Tag'
 import Box from '@/components/Box'
 import siteMetadata from '@/data/siteMetadata'
 import { dateSortDesc, getAllFilesFrontMatter } from '@/lib/mdx'
-import { buildWidgets, buildPortadaWidgets } from '@/lib/widgets'
+import { buildWidgets, buildPortadaWidgets, portadaFeedExclusions } from '@/lib/widgets'
 import Sidebar from '@/layouts/Sidebar'
 
 import NewsletterForm from '@/components/NewsletterForm'
@@ -17,11 +17,19 @@ export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')
   const widgets = await buildWidgets()
 
+  // excludeFromFeed (opción en data/portadaWidgets.js): esos artículos no
+  // entran al feed del home ni a la disputa del hero — en el home solo se
+  // ven dentro de su widget. Los widgets se construyen con la lista COMPLETA.
+  const excludedFromFeed = portadaFeedExclusions(posts)
+  const pool =
+    excludedFromFeed.size > 0 ? posts.filter((post) => !excludedFromFeed.has(post.slug)) : posts
+  const feedPosts = pool.length > 0 ? pool : posts // salvaguarda: config que excluya todo
+
   // Portada (Fase 6): los artículos con `featured: true` encabezan el home
   // aunque no sean los más nuevos. Orden entre ellos por `featuredOrder`
   // (menor primero; si falta, después) y, en empate, por fecha. Sin ninguno,
   // manda lo más reciente (orden cronológico normal).
-  const featured = posts
+  const featured = feedPosts
     .filter((post) => post.featured === true)
     .sort((a, b) => {
       const orderA = a.featuredOrder ?? Infinity
@@ -35,10 +43,10 @@ export async function getStaticProps() {
   // home, sus widgets y las secciones (2026-09-24).
   const hero =
     featured.find((post) => post.excludeHero !== true) ||
-    posts.find((post) => post.excludeHero !== true) ||
-    posts[0]
+    feedPosts.find((post) => post.excludeHero !== true) ||
+    feedPosts[0]
   const restFeatured = featured.filter((post) => post.slug !== hero.slug)
-  const rest = posts.filter(
+  const rest = feedPosts.filter(
     (post) => post.slug !== hero.slug && !restFeatured.some((f) => f.slug === post.slug)
   )
   const ordered = [hero, ...restFeatured, ...rest]
@@ -59,8 +67,9 @@ export default function Home({ posts, widgets, portadaWidgets }) {
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="container py-8">
-          {/* Nota principal (Box a todo el ancho) */}
-          <div className="-m-4 flex flex-wrap">
+          {/* Nota principal (Box a todo el ancho; margen vertical normal
+              para dejar respirar a los bloques siguientes) */}
+          <div className="-mx-4 flex flex-wrap">
             {posts[0].images && posts[0].images.length > 0 ? (
               <Box
                 title={posts[0].title}
@@ -95,7 +104,7 @@ export default function Home({ posts, widgets, portadaWidgets }) {
           {portadaWidgets.map((widget) => (
             <div
               key={widget.id}
-              className="mt-4 rounded-md border-2 border-gray-200 border-opacity-60 p-4 dark:border-gray-700"
+              className="mt-6 rounded-md border-2 border-gray-200 border-opacity-60 p-4 dark:border-gray-700"
             >
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="text-xl font-bold uppercase tracking-wide text-gray-900 dark:text-gray-100">
@@ -152,7 +161,7 @@ export default function Home({ posts, widgets, portadaWidgets }) {
           ))}
           {/* Sidebar (izquierda en desktop) + lista de artículos en Box —
               composición idéntica a panameconomics */}
-          <div className="-m-4 flex flex-wrap">
+          <div className="-mx-4 mt-8 flex flex-wrap">
             <Sidebar widgets={widgets} className="order-2 md:order-1" />
             <div className="order-1 w-full py-4 md:order-2 md:w-2/3">
               {posts.slice(1, maxDisplay).map((d) => (

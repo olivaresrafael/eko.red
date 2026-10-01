@@ -8,6 +8,7 @@ import siteMetadata from '@/data/siteMetadata'
 import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import SupportButton from '@/components/SupportButton'
+import XIcon from '@/components/XIcon'
 import { formatDateTime } from '@/lib/utils/formatDate'
 import {
   EmailShareButton,
@@ -15,21 +16,20 @@ import {
   FacebookIcon,
   RedditShareButton,
   TelegramShareButton,
-  TwitterShareButton,
+  TwitterShareButton as XShareButton,
   WhatsappShareButton,
   EmailIcon,
   RedditIcon,
   TelegramIcon,
-  TwitterIcon,
   WhatsappIcon,
 } from 'next-share'
 
 const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
 
+// Búsqueda en X (antes mobile.twitter.com): el intent de compartir/tweet de
+// twitter.com/intent sigue siendo el endpoint de X.
 const discussUrl = (slug) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `${siteMetadata.siteUrl}/blog/${slug}`
-  )}`
+  `https://x.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/blog/${slug}`)}`
 
 const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
@@ -65,7 +65,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
             className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
             style={{ gridTemplateRows: 'auto 1fr' }}
           >
-            <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+            <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
               <dt className="sr-only">Authors</dt>
               <dd>
                 <ul className="flex justify-center space-x-8 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
@@ -83,14 +83,17 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
                         <dt className="sr-only">Name</dt>
                         <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                        <dt className="sr-only">Twitter</dt>
+                        <dt className="sr-only">X</dt>
                         <dd>
                           {author.twitter && (
                             <Link
                               href={author.twitter}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
-                              {author.twitter.replace('https://twitter.com/', '@')}
+                              {author.twitter.replace(
+                                /^https?:\/\/(www\.)?(twitter|x)\.com\//,
+                                '@'
+                              )}
                             </Link>
                           )}
                         </dd>
@@ -101,16 +104,16 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
               </dd>
             </dl>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
-              <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
+              <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">{children}</div>
+              <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(slug)} rel="nofollow">
-                  {'Discuss on Twitter'}
+                  {'Comentar en X'}
                 </Link>
                 {` • `}
                 <Link href={editUrl(fileName)}>{'View on GitHub'}</Link>
               </div>
               <SupportButton />
-              <Comments frontMatter={frontMatter} />
+              <Comments />
             </div>
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
@@ -134,9 +137,9 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                     <EmailShareButton url={url} title={title}>
                       <EmailIcon size={30} round />
                     </EmailShareButton>
-                    <TwitterShareButton url={url} title={title} hashtags={tags}>
-                      <TwitterIcon size={30} round />
-                    </TwitterShareButton>
+                    <XShareButton url={url} title={title} hashtags={tags}>
+                      <XIcon size={30} round />
+                    </XShareButton>
                     <FacebookShareButton url={url} title={title}>
                       <FacebookIcon size={30} round />
                     </FacebookShareButton>

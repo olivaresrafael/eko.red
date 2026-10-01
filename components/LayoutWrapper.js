@@ -29,7 +29,7 @@ const LayoutWrapper = ({ children }) => {
     <>
       {/* Barra fixed en todas las páginas (estilo panameconomics): tags + nav.
           El logo pequeño aparece aquí cuando el header grande ya se fue de vista */}
-      <div className="fixed top-0 left-0 z-40 flex w-full items-center justify-between border-b-2 border-gray-200 border-opacity-60 bg-white p-1 dark:border-gray-700 dark:bg-gray-900">
+      <div className="fixed left-0 top-0 z-40 flex w-full items-center justify-between border-b-2 border-gray-200 border-opacity-60 bg-white p-1 dark:border-gray-700 dark:bg-gray-900">
         {scrolled && (
           <Link href="/" aria-label={siteMetadata.headerTitle} className="pl-3 pt-1">
             <Image

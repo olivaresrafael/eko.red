@@ -91,7 +91,7 @@ export default function SearchButton() {
           aria-modal="true"
           aria-label="Buscar artículos"
         >
-          <div className="mx-auto max-w-2xl px-4 pt-16 pb-10">
+          <div className="mx-auto max-w-2xl px-4 pb-10 pt-16">
             <div className="relative">
               <input
                 ref={inputRef}

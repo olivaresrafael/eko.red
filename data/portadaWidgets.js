@@ -9,7 +9,11 @@
 //  - posts: ['slug-1', 'slug-2']   → lista manual de artículos (se respeta el
 //                                    orden dado y se muestran todos; los slugs
 //                                    inexistentes se ignoran)
-//  Si define `posts`, se usa la lista manual y `tag` se ignora.
+//  - source: 'kanaime'             → artículos externos del blog hijo de esa
+//                                    fuente (data/external/<fuente>/); el
+//                                    bloque se renderiza con la identidad del
+//                                    portal hijo (sello + borde discontinuo)
+//  Si define `posts`, se usa la lista manual y el resto se ignora.
 //
 // Campos opcionales:
 //  - limit   → cuántos artículos mostrar (default 3 en modo tag; en lista
@@ -33,6 +37,18 @@ const portadaWidgets = [
     limit: 3,
     min: 2,
     href: '/tags/cultura',
+  },
+  // Blog hijo kanaime.org: se llena con los artículos externos de la fuente
+  // (data/external/kanaime/) y se renderiza con la identidad del portal hijo
+  // (borde discontinuo + sello). Se oculta solo si la fuente no tiene
+  // artículos.
+  {
+    id: 'kanaime',
+    title: 'Kanaime.org',
+    source: 'kanaime',
+    enabled: true,
+    limit: 3,
+    href: '/tags/kanaime',
   },
   // Ejemplo con lista manual:
   // {

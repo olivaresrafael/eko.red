@@ -19,30 +19,46 @@ const normalizeTag = (str) =>
 
 // Filtra las secciones con requiresContent que aún no tienen artículos
 // (ej. Kanaime oculta hasta publicar el primer artículo con tag 'kanaime').
+// Cuenta también los stubs externos (data/external/<fuente>/, blogs hijo):
+// basta un artículo indexado para que la sección aparezca en la navegación.
 // Se ejecuta al iniciar el build/dev server y el resultado se inyecta al
 // bundle como NEXT_PUBLIC_SECTIONS (server y client ven el mismo valor).
 function getVisibleSections() {
-  let files = []
-  try {
-    files = fs
-      .readdirSync(path.join(__dirname, 'data', 'blog'))
-      .filter((file) => /\.mdx?$/.test(file))
-  } catch (error) {
-    return sectionsConfig.filter((section) => !section.requiresContent)
-  }
-
   const usedTags = new Set()
-  for (const file of files) {
+
+  const collectTags = (dir) => {
+    let files = []
     try {
-      const { data } = matter(fs.readFileSync(path.join(__dirname, 'data', 'blog', file), 'utf8'))
-      if (data.draft === true) continue
-      ;(Array.isArray(data.tags) ? data.tags : []).forEach((tag) =>
-        usedTags.add(normalizeTag(tag))
-      )
+      files = fs.readdirSync(dir).filter((file) => /\.mdx?$/.test(file))
     } catch (error) {
-      // Frontmatter inválido: ignorar el archivo
+      return
+    }
+    for (const file of files) {
+      try {
+        const { data } = matter(fs.readFileSync(path.join(dir, file), 'utf8'))
+        if (data.draft === true) continue
+        ;(Array.isArray(data.tags) ? data.tags : []).forEach((tag) =>
+          usedTags.add(normalizeTag(tag))
+        )
+      } catch (error) {
+        // Frontmatter inválido: ignorar el archivo
+      }
     }
   }
+
+  collectTags(path.join(__dirname, 'data', 'blog'))
+
+  // Fuentes externas (blogs hijo): cada subdirectorio de data/external/
+  let sources = []
+  try {
+    sources = fs
+      .readdirSync(path.join(__dirname, 'data', 'external'), { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+  } catch (error) {
+    // Sin data/external/ no hay nada que añadir
+  }
+  sources.forEach((source) => collectTags(path.join(__dirname, 'data', 'external', source)))
 
   return sectionsConfig.filter(
     (section) => !section.requiresContent || usedTags.has(section.tag)
@@ -107,6 +123,11 @@ module.exports = withBundleAnalyzer({
     NEXT_PUBLIC_SECTIONS: JSON.stringify(getVisibleSections()),
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
+  // Miniaturas de blogs hijo: si un stub usa una URL de kanaime.org en
+  // `images`, next/image necesita el dominio aquí (el CSP ya permite img-src *).
+  images: {
+    domains: ['kanaime.org'],
+  },
   eslint: {
     dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
   },

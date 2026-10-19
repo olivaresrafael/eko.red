@@ -29,6 +29,18 @@ const widgets = [
     limit: 4,
     includeImg: true,
   },
+  // Widget del blog hijo kanaime.org: solo artículos externos (stubs de
+  // data/external/kanaime/), con diseño diferenciado (sello + borde
+  // discontinuo). Se oculta solo si la fuente no tiene artículos.
+  {
+    id: 'kanaime',
+    type: 'latest',
+    title: 'Kanaime.org',
+    enabled: true,
+    source: 'kanaime',
+    limit: 5,
+    includeImg: true,
+  },
   { id: 'categories', type: 'categories', title: 'Secciones', enabled: true },
   {
     id: 'latest',

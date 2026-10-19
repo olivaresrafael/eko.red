@@ -19,10 +19,20 @@ export default function Sidebar({ widgets = [], className = '' }) {
 }
 
 function Widget({ widget }) {
+  // Widgets de blogs hijo (p. ej. Kanaime.org): título con sello de la fuente
+  // y borde discontinuo en primary para diferenciarlos de los locales.
+  const external = !!widget.source
   return (
     <div className="pb-8">
-      <h2 className="border-b border-gray-200 pb-2 pt-4 text-xl font-light text-gray-900 dark:border-gray-700 dark:text-gray-100">
+      <h2
+        className={`pb-2 pt-4 text-xl font-light text-gray-900 dark:text-gray-100 ${
+          external
+            ? 'flex items-center gap-2 border-b-2 border-dashed border-primary-500 dark:border-primary-400'
+            : 'border-b border-gray-200 dark:border-gray-700'
+        }`}
+      >
         {widget.title}
+        {external && <SourceBadge source={widget.source} />}
       </h2>
       {widget.content.map((item, index) => (
         <div key={item.href || item.title || index} className="w-full pt-4">
@@ -93,7 +103,11 @@ function Widget({ widget }) {
                   {external && (
                     <ExternalLinkIcon className="ml-1 inline h-3.5 w-3.5 text-primary-500" />
                   )}
-                  {external && <SourceBadge source={article.source} className="mt-1" />}
+                  {/* Sello por fila solo en widgets mixtos; en el widget de
+                      la fuente (header con sello) sería ruido */}
+                  {external && !widget.source && (
+                    <SourceBadge source={article.source} className="mt-1" />
+                  )}
                   {article.date && (
                     <div className="text-xs text-gray-500 dark:text-gray-400">
                       <time dateTime={article.date}>

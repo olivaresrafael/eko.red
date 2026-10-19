@@ -50,22 +50,24 @@ Install dependencies with `yarn` (yarn.lock is authoritative; do not use npm).
     `requiresContent: true` (Kanaime) are hidden until ≥1 non-draft post uses
     that tag; `next.config.js` computes this at build/dev start and injects it
     as `NEXT_PUBLIC_SECTIONS` (restart the server after publishing the first
-    post of a new section)
+    post of a new section — it also counts external stubs, see below)
   - `widgets.js` — sidebar widget config (`id`, `type`, `title`, `enabled`,
     `limit`, `includeImg`; `tag` filtra el tipo `latest` a una etiqueta,
+    `source` lo llena con solo artículos del blog hijo de esa fuente,
     `order` fija el orden del tipo `authors` por slug; array order = display
     order; rendered by `layouts/Sidebar.js` — used on home and `/blog` only,
     never on `/tags/*`)
   - `portadaWidgets.js` — widgets under the home hero (`id`, `title`,
-    `enabled`, `limit`, `min`; fill with `tag` OR a manual `posts` slug list —
-    manual wins; `href` = "Ver toda la sección" link, default `/tags/<tag>` in
-    tag mode, `null` hides it; `excludeFromFeed: true` keeps the widget's
-    articles out of the home feed and the hero — visible only inside that
-    widget on the home (`/blog`, tags, RSS, sidebar unaffected); array order =
-    display order; built by `buildPortadaWidgets()` in `lib/widgets.js`,
-    rendered only by `pages/index.js`)
+    `enabled`, `limit`, `min`; fill with `tag`, a manual `posts` slug list, or
+    `source` = blog hijo (external stubs); `href` = "Ver toda la sección"
+    link; `excludeFromFeed: true` keeps the widget's articles out of the home
+    feed and the hero; array order = display order; built by
+    `buildPortadaWidgets()` in `lib/widgets.js`, rendered only by
+    `pages/index.js`)
+  - `externalSources.js` — label/dominio por fuente externa (sello visual)
   - `blog/*.mdx` — posts
   - `authors/*.md` — author profiles
+  - `external/<fuente>/*.md` — stubs de blogs hijo (ver abajo)
 - `scripts/` — `compose.js` (new post), `generate-sitemap.js`, `next-remote-watch.js`
 - `public/static/` — images and static assets (posts reference `/static/images/...`)
 
@@ -125,6 +127,30 @@ canonicalUrl: '' # optional
 - Images live in `public/static/images/` and are referenced as
   `/static/images/...` (no `public/` prefix in content).
 - `draft: true` excludes the post from lists, RSS, and the sitemap.
+
+### Artículos de blogs hijo (índice externo, p. ej. kanaime.org)
+
+`eko.red` indexa metadata de artículos de sus blogs hijo (modelo Xataca): en
+eko.red solo vive el frontmatter; el artículo completo está en el portal hijo
+y se abre en pestaña nueva con diseño diferenciado (borde discontinuo + sello
+del dominio).
+
+- Un artículo externo = un stub con solo frontmatter en
+  `data/external/<fuente>/<slug>.md` (fuente: `kanaime` → kanaime.org; ver
+  `lib/externalPosts.js` y `data/externalSources.js`). Frontmatter:
+  `title`, `date`, `summary`, `images`, `tags`, `draft` y **`externalUrl`
+  (obligatorio** — sin ella el stub se ignora con warning en build).
+- Aparecen en: feed de la portada (mezclados por fecha, **nunca hero ni
+  featured**), `/blog`, `/tags/<tag>`, el widget/bloque Kanaime de portada y
+  sidebar (configs con `source: 'kanaime'` en `data/widgets.js` y
+  `data/portadaWidgets.js`) y el feed de `/tags/kanaime`.
+- NO aparecen en: el feed global `public/feed.xml`, el sitemap (vive en el
+  hijo), el buscador, ni generan ruta propia (`/blog/<slug>` no existe para
+  externos).
+- La sección KANAIME de la navegación se activa con el primer stub no-borrador
+  (locales + externos); reiniciar el dev server tras añadirlo.
+- `node scripts/compose.js` es solo para posts locales; los stubs se crean a
+  mano copiando `data/external/kanaime/_ejemplo.md`.
 
 ## Configuration notes
 

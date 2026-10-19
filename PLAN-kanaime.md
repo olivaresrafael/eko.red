@@ -1,9 +1,9 @@
 # PLAN-kanaime.md — Artículos de kanaime.org indexados en eko.red
 
+> **COMPLETADO (2026-10-19)** — todas las fases verificadas con build.
 > Modelo tipo Xataca: eko.red (blog padre) muestra metadata de artículos de sus
 > blogs hijos. Artículo completo en el portal hijo (kanaime.org), en eko.red solo
 > el frontmatter + link que abre en pestaña nueva, con diseño tarjeta diferenciado.
-> Marcar con `[x]` al completar. Actualizado: 2026-10-19.
 
 ## Decisiones (confirmadas)
 
@@ -78,37 +78,53 @@
   `public/tags/kanaime/feed.xml` apuntando a kanaime.org y feed global sin
   kanaime. Segundo build sin stubs: degrada bien (sin `/tags/kanaime`).
 
-## Fase 4 — Widgets Kanaime.org ⏳
+## Fase 4 — Widgets Kanaime.org ✅ (2026-10-19)
 
-- [ ] **4.1 Sidebar** (`data/widgets.js` + `lib/widgets.js` + `layouts/Sidebar.js`):
+- [x] **4.1 Sidebar** (`data/widgets.js` + `lib/widgets.js` + `layouts/Sidebar.js`):
       campo `source` en el tipo `latest`
       (`{ id: 'kanaime', type: 'latest', source: 'kanaime', limit: 5, includeImg: true }`).
-      `buildWidgets()` recibe los externos y solo los inyecta en el widget con
-      `source`; el resto de widgets sigue 100% local.
-- [ ] **4.2 Portada** (`data/portadaWidgets.js` + `lib/widgets.js` + `pages/index.js`):
-      nuevo modo de llenado `source` en `buildPortadaWidgets()` (además de `tag`/
-      `posts[]`), bloque renderizado con estilo Kanaime (no el markup genérico).
-      Default `href: '/tags/kanaime'`.
+      `buildWidgets()` carga los externos y solo los inyecta en el widget con
+      `source` (se oculta si la fuente no tiene artículos); el resto de widgets
+      sigue 100% local. `Widget` con `source` lleva header con sello + borde
+      discontinuo; el sello por fila se suprime en widgets de fuente (ruido).
+- [x] **4.2 Portada** (`data/portadaWidgets.js` + `lib/widgets.js` + `pages/index.js`):
+      nuevo modo de llenado `source` en `buildPortadaWidgets()` (además de
+      `tag`/`posts[]`; `href` default `/tags/<fuente>`), devuelve `source` en
+      cada widget. Bloque renderizado con identidad Kanaime: borde discontinuo
+      + sello en el header; filas con link externo (pestaña nueva), icono y
+      miniatura con borde discontinuo.
+- Verificado con build + 2 stubs temporales (borrados): bloque de portada y
+      widget sidebar visibles en home y `/blog` con enlaces externos; segundo
+      build sin stubs: ambos widgets se ocultan solos.
 
-## Fase 5 — Navegación y SEO ⏳
+## Fase 5 — Navegación y SEO ✅ (2026-10-19)
 
-- [ ] **5.1 `next.config.js → getVisibleSections()`**: escanear también
-      `data/external/*` para contar tags → sección KANAIME (`requiresContent: true`)
-      visible en header/scroll/mobile en cuanto exista un stub (reiniciar dev server).
+- [x] **5.1 `next.config.js → getVisibleSections()`**: refactorizado con
+      `collectTags(dir)` — escanea `data/blog` **y** cada subdirectorio de
+      `data/external/` → la sección KANAIME (`requiresContent: true`) aparece
+      en header/scroll/mobile en cuanto exista un stub no-borrador.
 - [x] **5.2 `lib/generate-rss.js`**: branch por `externalUrl` (guid/link = URL
       externa) para el feed de `/tags/kanaime`; feed global sigue solo-local.
       *(Hecho adelantado en la Fase 3.)*
-- [ ] **5.3 `next.config.js` `images`**: añadir dominio `kanaime.org` si las
-      miniaturas se sirven desde allí (CSP `img-src *` ya lo permite).
+- [x] **5.3 `next.config.js` `images.domains: ['kanaime.org']`** — permite
+      miniaturas hotlinkadas desde el portal hijo con `next/image` (el CSP
+      `img-src *` ya lo permitía).
 
-## Fase 6 — Verificación ⏳
+## Fase 6 — Verificación ✅ (2026-10-19)
 
-- [ ] `yarn lint` + `yarn build` OK.
-- [ ] Home: externos en el feed (nunca hero), bloque bajo hero, widget en sidebar.
-- [ ] `/blog`: filas externas + widget sidebar. `/tags/kanaime` generada.
-- [ ] Sección KANAIME en header. Enlaces en pestaña nueva (`rel=noopener`).
-- [ ] Drafts excluidos. `public/tags/kanaime/feed.xml` con URLs externas.
-- [ ] Documentar stubs y `source` en `AGENTS.md`.
+- [x] `yarn lint` limpio + `yarn build` OK (múltiples builds con/sin stubs).
+- [x] Home: externos en el feed (nunca hero), bloque bajo hero con enlace
+      "Ver toda la sección → /tags/kanaime", widget en sidebar (home + /blog).
+- [x] `/blog`: filas externas + widget sidebar. `/tags/kanaime` generada.
+- [x] Sección KANAIME en header/scroll/mobile (verificado en HTML del build
+      y por node contra `NEXT_PUBLIC_SECTIONS`, con y sin stubs; el stub
+      draft `_ejemplo.md` NO la activa).
+- [x] Enlaces en pestaña nueva (`target="_blank"` + `rel="noopener noreferrer"`).
+- [x] Drafts excluidos. `public/tags/kanaime/feed.xml` con URLs externas;
+      feed global sin kanaime.
+- [x] Documentado en `AGENTS.md`: estructura `data/external/`, `source` en
+      widgets/portadaWidgets, `externalSources.js` y sección nueva
+      "Artículos de blogs hijo".
 
 ---
 

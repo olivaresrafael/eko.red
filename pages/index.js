@@ -5,6 +5,8 @@ import { PageSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
 import Box from '@/components/Box'
 import ExternalCard from '@/components/ExternalCard'
+import ExternalLinkIcon from '@/components/ExternalLinkIcon'
+import SourceBadge from '@/components/SourceBadge'
 import siteMetadata from '@/data/siteMetadata'
 import { dateSortDesc, getAllFilesFrontMatter } from '@/lib/mdx'
 import { getAllExternalFrontMatter } from '@/lib/externalPosts'
@@ -108,15 +110,20 @@ export default function Home({ posts, widgets, portadaWidgets }) {
           </div>
           {/* Widgets de portada (data/portadaWidgets.js): bloques bajo la
               nota principal, en el orden del config; cada uno se llena por
-              tag o por lista manual de artículos */}
+              tag, lista manual o fuente externa (blogs hijo) */}
           {portadaWidgets.map((widget) => (
             <div
               key={widget.id}
-              className="mt-6 rounded-md border-2 border-gray-200 border-opacity-60 p-4 dark:border-gray-700"
+              className={`mt-6 rounded-md border-2 p-4 ${
+                widget.source
+                  ? 'border-dashed border-primary-500 border-opacity-70 dark:border-primary-400 dark:border-opacity-50'
+                  : 'border-gray-200 border-opacity-60 dark:border-gray-700'
+              }`}
             >
               <div className="mb-3 flex items-center justify-between">
-                <h2 className="text-xl font-bold uppercase tracking-wide text-gray-900 dark:text-gray-100">
+                <h2 className="flex items-center gap-2 text-xl font-bold uppercase tracking-wide text-gray-900 dark:text-gray-100">
                   {widget.title}
+                  {widget.source && <SourceBadge source={widget.source} />}
                 </h2>
                 {widget.href && (
                   <Link
@@ -128,42 +135,52 @@ export default function Home({ posts, widgets, portadaWidgets }) {
                 )}
               </div>
               <div className="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
-                {widget.articles.map((article) => (
-                  <div
-                    key={article.slug}
-                    className="flex flex-col space-y-3 py-3 first:py-0 sm:flex-row sm:space-x-4 sm:space-y-0"
-                  >
-                    {article.images && article.images[0] && (
-                      <Link
-                        href={`/blog/${article.slug}`}
-                        aria-label={`Link to ${article.title}`}
-                        className="w-full shrink-0 sm:w-64"
-                      >
-                        <Image
-                          alt={article.title}
-                          src={article.images[0]}
-                          width={700}
-                          height={466}
-                          layout="responsive"
-                          className="rounded-md object-cover"
-                        />
-                      </Link>
-                    )}
-                    <div>
-                      <h3 className="text-2xl font-bold leading-8 tracking-tight">
+                {widget.articles.map((article) => {
+                  // Artículos de blogs hijo: link a la URL externa (pestaña
+                  // nueva) + icono; los locales conservan /blog/<slug>.
+                  const external = !!article.externalUrl
+                  const href = article.externalUrl || `/blog/${article.slug}`
+                  return (
+                    <div
+                      key={article.slug}
+                      className="flex flex-col space-y-3 py-3 first:py-0 sm:flex-row sm:space-x-4 sm:space-y-0"
+                    >
+                      {article.images && article.images[0] && (
                         <Link
-                          href={`/blog/${article.slug}`}
-                          className="text-gray-900 dark:text-gray-100"
+                          href={href}
+                          aria-label={`Link to ${article.title}`}
+                          className="w-full shrink-0 sm:w-64"
                         >
-                          {article.title}
+                          <Image
+                            alt={article.title}
+                            src={article.images[0]}
+                            width={700}
+                            height={466}
+                            layout="responsive"
+                            className={`rounded-md object-cover ${
+                              external
+                                ? 'border border-dashed border-primary-500 dark:border-primary-400'
+                                : ''
+                            }`}
+                          />
                         </Link>
-                      </h3>
-                      <p className="prose mt-2 max-w-none text-gray-500 dark:text-gray-400">
-                        {article.summary}
-                      </p>
+                      )}
+                      <div>
+                        <h3 className="text-2xl font-bold leading-8 tracking-tight">
+                          <Link href={href} className="text-gray-900 dark:text-gray-100">
+                            {article.title}
+                          </Link>
+                          {external && (
+                            <ExternalLinkIcon className="ml-1.5 inline h-5 w-5 text-primary-500" />
+                          )}
+                        </h3>
+                        <p className="prose mt-2 max-w-none text-gray-500 dark:text-gray-400">
+                          {article.summary}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           ))}

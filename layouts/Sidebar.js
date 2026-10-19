@@ -1,5 +1,7 @@
 import Image from '@/components/Image'
 import Link from '@/components/Link'
+import SourceBadge from '@/components/SourceBadge'
+import ExternalLinkIcon from '@/components/ExternalLinkIcon'
 import { formatDateTime } from '@/lib/utils/formatDate'
 
 // Sidebar de widgets (configuración en data/widgets.js, contenido en
@@ -57,37 +59,51 @@ function Widget({ widget }) {
             )}
           </div>
           <ul>
-            {(item.articles || []).map((article) => (
-              <li
-                key={article.slug}
-                className="border-b border-gray-100 py-2 last:border-b-0 dark:border-gray-700"
-              >
-                {widget.includeImg && article.images && article.images[0] && (
-                  <Link href={`/blog/${article.slug}`} aria-label={`Link to ${article.title}`}>
-                    <Image
-                      src={article.images[0]}
-                      alt={article.title}
-                      width={320}
-                      height={180}
-                      className="mb-2 w-full rounded object-cover"
-                    />
-                  </Link>
-                )}
-                <Link
-                  href={`/blog/${article.slug}`}
-                  className="text-sm font-medium text-gray-800 hover:text-primary-600 dark:text-gray-200 dark:hover:text-primary-500"
+            {(item.articles || []).map((article) => {
+              // Artículos de blogs hijos: link a la URL externa (pestaña nueva)
+              // + sello de la fuente; los locales conservan /blog/<slug>.
+              const external = !!article.externalUrl
+              const href = article.externalUrl || `/blog/${article.slug}`
+              return (
+                <li
+                  key={article.slug}
+                  className="border-b border-gray-100 py-2 last:border-b-0 dark:border-gray-700"
                 >
-                  {article.title}
-                </Link>
-                {article.date && (
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    <time dateTime={article.date}>
-                      {formatDateTime(article.date, article.dateRaw)}
-                    </time>
-                  </div>
-                )}
-              </li>
-            ))}
+                  {widget.includeImg && article.images && article.images[0] && (
+                    <Link href={href} aria-label={`Link to ${article.title}`}>
+                      <Image
+                        src={article.images[0]}
+                        alt={article.title}
+                        width={320}
+                        height={180}
+                        className={`mb-2 w-full rounded object-cover ${
+                          external
+                            ? 'border border-dashed border-primary-500 dark:border-primary-400'
+                            : ''
+                        }`}
+                      />
+                    </Link>
+                  )}
+                  <Link
+                    href={href}
+                    className="text-sm font-medium text-gray-800 hover:text-primary-600 dark:text-gray-200 dark:hover:text-primary-500"
+                  >
+                    {article.title}
+                  </Link>
+                  {external && (
+                    <ExternalLinkIcon className="ml-1 inline h-3.5 w-3.5 text-primary-500" />
+                  )}
+                  {external && <SourceBadge source={article.source} className="mt-1" />}
+                  {article.date && (
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      <time dateTime={article.date}>
+                        {formatDateTime(article.date, article.dateRaw)}
+                      </time>
+                    </div>
+                  )}
+                </li>
+              )
+            })}
           </ul>
         </div>
       ))}

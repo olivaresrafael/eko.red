@@ -1,6 +1,8 @@
 import Link from '@/components/Link'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
+import SourceBadge from '@/components/SourceBadge'
+import ExternalLinkIcon from '@/components/ExternalLinkIcon'
 import siteMetadata from '@/data/siteMetadata'
 import { useState } from 'react'
 import Pagination from '@/components/Pagination'
@@ -65,12 +67,16 @@ export default function ListLayout({
               {!filteredBlogPosts.length && 'No posts found.'}
               {displayPosts.map((frontMatter) => {
                 const { slug, date, dateRaw, title, summary, tags, images } = frontMatter
+                // Artículos de blogs hijos (p. ej. kanaime.org): el link es la
+                // URL externa (Link abre pestaña nueva) y la fila lleva sello.
+                const external = !!frontMatter.externalUrl
+                const href = frontMatter.externalUrl || `/blog/${slug}`
                 return (
                   <li key={slug} className="py-4">
                     <article className="flex flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
                       {images && images[0] && (
                         <Link
-                          href={`/blog/${slug}`}
+                          href={href}
                           aria-label={`Link to ${title}`}
                           className="w-full shrink-0 sm:w-48"
                         >
@@ -80,25 +86,30 @@ export default function ListLayout({
                             width={700}
                             height={466}
                             layout="responsive"
-                            className="rounded-md border border-gray-200 object-cover dark:border-gray-700"
+                            className={`rounded-md border object-cover ${
+                              external
+                                ? 'border-dashed border-primary-500 dark:border-primary-400'
+                                : 'border-gray-200 dark:border-gray-700'
+                            }`}
                           />
                         </Link>
                       )}
                       <div className="space-y-2">
                         <dl>
                           <dt className="sr-only">Published on</dt>
-                          <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                          <dd className="flex items-center gap-2 text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                             <time dateTime={date}>{formatDateTime(date, dateRaw)}</time>
+                            {external && <SourceBadge source={frontMatter.source} />}
                           </dd>
                         </dl>
                         <div>
                           <h3 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link
-                              href={`/blog/${slug}`}
-                              className="text-gray-900 dark:text-gray-100"
-                            >
+                            <Link href={href} className="text-gray-900 dark:text-gray-100">
                               {title}
                             </Link>
+                            {external && (
+                              <ExternalLinkIcon className="ml-1.5 inline h-5 w-5 text-primary-500" />
+                            )}
                           </h3>
                           <div className="flex flex-wrap">
                             {tags.map((tag) => (

@@ -20,9 +20,9 @@
 ## Fase 1 — Capa de datos (stubs + loader) ✅ (2026-10-19)
 
 - [x] **1.1 Directorio `data/external/kanaime/`** con stub de ejemplo
-  (`_ejemplo.md`, `draft: true` para que nunca se publique).
-  Frontmatter: `title`, `date` (ISO con offset), `summary`, `images`, `tags`
-  (default `['kanaime']`), `externalUrl` (obligatorio), `draft`.
+      (`_ejemplo.md`, `draft: true` para que nunca se publique).
+      Frontmatter: `title`, `date` (ISO con offset), `summary`, `images`, `tags`
+      (default `['kanaime']`), `externalUrl` (obligatorio), `draft`.
 - [x] **1.2 Nuevo `lib/externalPosts.js`**:
   - `getExternalFrontMatter(source)` — espejo de `getAllFilesFrontMatter`
     (gray-matter, filtra `draft`, normaliza `date`/`dateRaw`, añade `slug`,
@@ -35,49 +35,57 @@
     `externalUrl` → warning + ignorado, stub válido → normalizado
     (`date` ISO UTC, `dateRaw`, `slug`, `source`, `tags: []`). ESLint limpio.
 
-## Fase 2 — Componentes de diseño ⏳
+## Fase 2 — Componentes de diseño ✅ (2026-10-19)
 
-- [ ] **2.1 Nuevo `components/ExternalCard.js`** (adaptado de `Box`): borde/
-  acento Kanaime, badge "KANAIME.ORG" + icono enlace externo, CTA
-  "Leer en kanaime.org →". `href={externalUrl}` → `Link` abre pestaña nueva.
-- [ ] **2.2 `layouts/ListLayout.js`**: branch de fila externa (badge + icono)
-  para `/blog` y `/tags/*`.
-- [ ] **2.3 `layouts/Sidebar.js`**: branch por `article.externalUrl` en los
-  enlaces (hoy hardcodean `/blog/${slug}`) + sello del dominio.
+- [x] **2.1 Nuevo `components/ExternalCard.js`** (adaptado de `Box`): borde
+      discontinuo en primary + `SourceBadge` "KANAIME.ORG" + icono enlace
+      externo, CTA "Leer en kanaime.org →". `href={externalUrl}` → `Link`
+      abre pestaña nueva.
+      - Apoyos: `components/SourceBadge.js` (sello con label + icono),
+        `components/ExternalLinkIcon.js` (heroicons external-link) y
+        `data/externalSources.js` (label/dominio por fuente — los componentes
+        cliente no importan `lib/externalPosts.js`, que usa `fs`).
+- [x] **2.2 `layouts/ListLayout.js`**: branch de fila externa (badge junto a
+      la fecha, icono junto al título, miniatura con borde discontinuo) para
+      `/blog` y `/tags/*`.
+- [x] **2.3 `layouts/Sidebar.js`**: branch por `article.externalUrl` en los
+      enlaces (antes hardcodeaban `/blog/${slug}`) + icono, badge y miniatura
+      con borde discontinuo en filas externas.
+- Verificado: ESLint limpio + Prettier aplicado en todos los archivos.
 
 ## Fase 3 — Integración en páginas ⏳
 
 - [ ] **3.1 `pages/index.js`**: externos fusionados al pool pero excluidos de
-  `featured`/hero → van en `rest` por fecha. Render
-  `post.externalUrl ? <ExternalCard/> : <Box/>`.
+      `featured`/hero → van en `rest` por fecha. Render
+      `post.externalUrl ? <ExternalCard/> : <Box/>`.
 - [ ] **3.2 `pages/blog.js`** y **`pages/blog/page/[page].js`**: fusión en
-  `getStaticProps` → `ListLayout` con fila externa.
+      `getStaticProps` → `ListLayout` con fila externa.
 - [ ] **3.3 `pages/tags/[tag].js`**: fusiona externos del tag; `getStaticPaths`
-  genera `/tags/kanaime` aunque no haya posts locales con ese tag.
+      genera `/tags/kanaime` aunque no haya posts locales con ese tag.
 - [ ] **3.4 Nunca en `pages/blog/[...slug].js`**: loader separado →
-  `getStaticPaths` (fallback: false) no genera rutas externas.
+      `getStaticPaths` (fallback: false) no genera rutas externas.
 
 ## Fase 4 — Widgets Kanaime.org ⏳
 
 - [ ] **4.1 Sidebar** (`data/widgets.js` + `lib/widgets.js` + `layouts/Sidebar.js`):
-  campo `source` en el tipo `latest`
-  (`{ id: 'kanaime', type: 'latest', source: 'kanaime', limit: 5, includeImg: true }`).
-  `buildWidgets()` recibe los externos y solo los inyecta en el widget con
-  `source`; el resto de widgets sigue 100% local.
+      campo `source` en el tipo `latest`
+      (`{ id: 'kanaime', type: 'latest', source: 'kanaime', limit: 5, includeImg: true }`).
+      `buildWidgets()` recibe los externos y solo los inyecta en el widget con
+      `source`; el resto de widgets sigue 100% local.
 - [ ] **4.2 Portada** (`data/portadaWidgets.js` + `lib/widgets.js` + `pages/index.js`):
-  nuevo modo de llenado `source` en `buildPortadaWidgets()` (además de `tag`/
-  `posts[]`), bloque renderizado con estilo Kanaime (no el markup genérico).
-  Default `href: '/tags/kanaime'`.
+      nuevo modo de llenado `source` en `buildPortadaWidgets()` (además de `tag`/
+      `posts[]`), bloque renderizado con estilo Kanaime (no el markup genérico).
+      Default `href: '/tags/kanaime'`.
 
 ## Fase 5 — Navegación y SEO ⏳
 
 - [ ] **5.1 `next.config.js → getVisibleSections()`**: escanear también
-  `data/external/*` para contar tags → sección KANAIME (`requiresContent: true`)
-  visible en header/scroll/mobile en cuanto exista un stub (reiniciar dev server).
+      `data/external/*` para contar tags → sección KANAIME (`requiresContent: true`)
+      visible en header/scroll/mobile en cuanto exista un stub (reiniciar dev server).
 - [ ] **5.2 `lib/generate-rss.js`**: branch por `externalUrl` (guid/link = URL
-  externa) para el feed de `/tags/kanaime`; feed global sigue solo-local.
+      externa) para el feed de `/tags/kanaime`; feed global sigue solo-local.
 - [ ] **5.3 `next.config.js` `images`**: añadir dominio `kanaime.org` si las
-  miniaturas se sirven desde allí (CSP `img-src *` ya lo permite).
+      miniaturas se sirven desde allí (CSP `img-src *` ya lo permite).
 
 ## Fase 6 — Verificación ⏳
 
@@ -90,11 +98,11 @@
 
 ---
 
-| Bloque | Esfuerzo estimado |
-|--------|-------------------|
-| Fase 1 (datos) | ~1 hora |
-| Fase 2 (diseño) | ~2–3 horas |
-| Fase 3 (páginas) | ~2 horas |
-| Fase 4 (widgets) | ~2 horas |
-| Fase 5 (nav/SEO) | ~1 hora |
-| Fase 6 (verificación) | ~1 hora |
+| Bloque                | Esfuerzo estimado |
+| --------------------- | ----------------- |
+| Fase 1 (datos)        | ~1 hora           |
+| Fase 2 (diseño)       | ~2–3 horas        |
+| Fase 3 (páginas)      | ~2 horas          |
+| Fase 4 (widgets)      | ~2 horas          |
+| Fase 5 (nav/SEO)      | ~1 hora           |
+| Fase 6 (verificación) | ~1 hora           |

@@ -3,6 +3,7 @@ import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayout'
 import generateRss from '@/lib/generate-rss'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
+import { getAllExternalFrontMatter, mergeWithExternal } from '@/lib/externalPosts'
 import { getAllTags } from '@/lib/tags'
 import kebabCase from '@/lib/utils/kebabCase'
 import fs from 'fs'
@@ -12,6 +13,15 @@ const root = process.cwd()
 
 export async function getStaticPaths() {
   const tags = await getAllTags('blog')
+
+  // Tags de artículos externos (blogs hijo): la página del tag debe existir
+  // aunque no haya contenido local con esa etiqueta (p. ej. /tags/kanaime).
+  getAllExternalFrontMatter().forEach((post) => {
+    ;(post.tags || []).forEach((tag) => {
+      const formattedTag = kebabCase(tag)
+      if (!(formattedTag in tags)) tags[formattedTag] = 1
+    })
+  })
 
   return {
     paths: Object.keys(tags).map((tag) => ({
@@ -24,9 +34,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const allPosts = await getAllFilesFrontMatter('blog')
+  // Locales + externos (kanaime.org) mezclados por fecha; los stubs externos
+  // solo traen metadata y linkean al portal hijo (pestaña nueva).
+  const allPosts = mergeWithExternal(await getAllFilesFrontMatter('blog'))
   const filteredPosts = allPosts.filter(
-    (post) => post.draft !== true && post.tags.map((t) => kebabCase(t)).includes(params.tag)
+    (post) => post.draft !== true && (post.tags || []).map((t) => kebabCase(t)).includes(params.tag)
   )
 
   // rss

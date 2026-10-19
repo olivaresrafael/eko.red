@@ -1,12 +1,14 @@
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
+import { mergeWithExternal } from '@/lib/externalPosts'
 import { buildWidgets } from '@/lib/widgets'
 import ListLayout from '@/layouts/ListLayout'
 import { POSTS_PER_PAGE } from '../../blog'
 
 export async function getStaticPaths() {
-  const totalPosts = await getAllFilesFrontMatter('blog')
+  // El total incluye externos (kanaime.org) para que la paginación cuadre
+  const totalPosts = mergeWithExternal(await getAllFilesFrontMatter('blog'))
   const totalPages = Math.ceil(totalPosts.length / POSTS_PER_PAGE)
   const paths = Array.from({ length: totalPages }, (_, i) => ({
     params: { page: (i + 1).toString() },
@@ -22,7 +24,7 @@ export async function getStaticProps(context) {
   const {
     params: { page },
   } = context
-  const posts = await getAllFilesFrontMatter('blog')
+  const posts = mergeWithExternal(await getAllFilesFrontMatter('blog'))
   const widgets = await buildWidgets()
   const pageNumber = parseInt(page)
   const initialDisplayPosts = posts.slice(

@@ -53,17 +53,30 @@
       con borde discontinuo en filas externas.
 - Verificado: ESLint limpio + Prettier aplicado en todos los archivos.
 
-## Fase 3 — Integración en páginas ⏳
+## Fase 3 — Integración en páginas ✅ (2026-10-19)
 
-- [ ] **3.1 `pages/index.js`**: externos fusionados al pool pero excluidos de
-      `featured`/hero → van en `rest` por fecha. Render
+- [x] **3.1 `pages/index.js`**: externos fusionados al pool pero excluidos de
+      `featured`/hero → van en `rest` por fecha (comparación por referencia
+      para evitar falsos positivos de slug). Render
       `post.externalUrl ? <ExternalCard/> : <Box/>`.
-- [ ] **3.2 `pages/blog.js`** y **`pages/blog/page/[page].js`**: fusión en
-      `getStaticProps` → `ListLayout` con fila externa.
-- [ ] **3.3 `pages/tags/[tag].js`**: fusiona externos del tag; `getStaticPaths`
-      genera `/tags/kanaime` aunque no haya posts locales con ese tag.
-- [ ] **3.4 Nunca en `pages/blog/[...slug].js`**: loader separado →
-      `getStaticPaths` (fallback: false) no genera rutas externas.
+- [x] **3.2 `pages/blog.js`** y **`pages/blog/page/[page].js`**: fusión vía
+      `mergeWithExternal()` en `getStaticProps` **y** en el conteo de
+      `getStaticPaths` (la paginación cuadra).
+- [x] **3.3 `pages/tags/[tag].js`**: `getStaticPaths` añade los tags de los
+      externos (se genera `/tags/kanaime` sin contenido local); `getStaticProps`
+      fusiona por fecha. Además `(post.tags || [])` (defensa en el filtro).
+- [x] **3.4 Nunca en `pages/blog/[...slug].js`**: verificado — sigue usando
+      `getFiles('blog')` (solo locales), `fallback: false` intacto.
+- [x] **Helper `mergeWithExternal(localPosts)`** en `lib/externalPosts.js`.
+- [x] **`lib/generate-rss.js`**: guid/link externo para posts de blogs hijo
+      (cubre el feed de `/tags/kanaime`; el global `public/feed.xml` solo
+      recibe locales).
+- Verificado con build completo usando un stub publicado temporal (borrado
+  después): `/tags/kanaime` generado con fila externa (badge + borde
+  discontinuo + `target="_blank"`/`rel="noopener noreferrer"`), home con
+  ExternalCard en el feed y hero local, `/blog` con fila externa,
+  `public/tags/kanaime/feed.xml` apuntando a kanaime.org y feed global sin
+  kanaime. Segundo build sin stubs: degrada bien (sin `/tags/kanaime`).
 
 ## Fase 4 — Widgets Kanaime.org ⏳
 
@@ -82,8 +95,9 @@
 - [ ] **5.1 `next.config.js → getVisibleSections()`**: escanear también
       `data/external/*` para contar tags → sección KANAIME (`requiresContent: true`)
       visible en header/scroll/mobile en cuanto exista un stub (reiniciar dev server).
-- [ ] **5.2 `lib/generate-rss.js`**: branch por `externalUrl` (guid/link = URL
+- [x] **5.2 `lib/generate-rss.js`**: branch por `externalUrl` (guid/link = URL
       externa) para el feed de `/tags/kanaime`; feed global sigue solo-local.
+      *(Hecho adelantado en la Fase 3.)*
 - [ ] **5.3 `next.config.js` `images`**: añadir dominio `kanaime.org` si las
       miniaturas se sirven desde allí (CSP `img-src *` ya lo permite).
 

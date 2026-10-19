@@ -4,8 +4,10 @@ import Image from '@/components/Image'
 import { PageSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
 import Box from '@/components/Box'
+import ExternalCard from '@/components/ExternalCard'
 import siteMetadata from '@/data/siteMetadata'
 import { dateSortDesc, getAllFilesFrontMatter } from '@/lib/mdx'
+import { getAllExternalFrontMatter } from '@/lib/externalPosts'
 import { buildWidgets, buildPortadaWidgets, portadaFeedExclusions } from '@/lib/widgets'
 import Sidebar from '@/layouts/Sidebar'
 
@@ -46,9 +48,15 @@ export async function getStaticProps() {
     feedPosts.find((post) => post.excludeHero !== true) ||
     feedPosts[0]
   const restFeatured = featured.filter((post) => post.slug !== hero.slug)
-  const rest = feedPosts.filter(
-    (post) => post.slug !== hero.slug && !restFeatured.some((f) => f.slug === post.slug)
-  )
+
+  // Artículos de blogs hijo (p. ej. kanaime.org): solo en el feed
+  // cronológico, NUNCA como hero ni featured (esos slots son de contenido
+  // propio). Se renderizan con ExternalCard (link al portal, pestaña nueva).
+  const externalPosts = getAllExternalFrontMatter()
+
+  const rest = [...feedPosts, ...externalPosts]
+    .filter((post) => post !== hero && !restFeatured.includes(post))
+    .sort((a, b) => dateSortDesc(a.date, b.date))
   const ordered = [hero, ...restFeatured, ...rest]
 
   // Widgets de portada (data/portadaWidgets.js): bloques bajo la nota principal
@@ -164,16 +172,30 @@ export default function Home({ posts, widgets, portadaWidgets }) {
           <div className="-mx-4 mt-8 flex flex-wrap">
             <Sidebar widgets={widgets} className="order-2 md:order-1" />
             <div className="order-1 w-full py-4 md:order-2 md:w-2/3">
-              {posts.slice(1, maxDisplay).map((d) => (
-                <Box
-                  key={d.slug}
-                  title={d.title}
-                  description={d.summary}
-                  imgSrc={d.images && d.images.length > 0 ? d.images[0] : null}
-                  href={`/blog/${d.slug}`}
-                  tags={d.tags}
-                />
-              ))}
+              {posts
+                .slice(1, maxDisplay)
+                .map((d) =>
+                  d.externalUrl ? (
+                    <ExternalCard
+                      key={d.slug}
+                      title={d.title}
+                      description={d.summary}
+                      imgSrc={d.images && d.images.length > 0 ? d.images[0] : null}
+                      href={d.externalUrl}
+                      tags={d.tags}
+                      source={d.source}
+                    />
+                  ) : (
+                    <Box
+                      key={d.slug}
+                      title={d.title}
+                      description={d.summary}
+                      imgSrc={d.images && d.images.length > 0 ? d.images[0] : null}
+                      href={`/blog/${d.slug}`}
+                      tags={d.tags}
+                    />
+                  )
+                )}
             </div>
           </div>
         </div>

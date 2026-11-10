@@ -227,11 +227,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/autocracias</loc>
+    <loc>https://eko.red/tags/arte</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/autoritarismo</loc>
+    <loc>https://eko.red/tags/autocracias</loc>
   </url>
 
   <url>
@@ -239,7 +239,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/arte</loc>
+    <loc>https://eko.red/tags/autoritarismo</loc>
   </url>
 
   <url>
@@ -251,11 +251,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/centro-de-investigaciones-populares</loc>
+    <loc>https://eko.red/tags/chatgpt</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/chatgpt</loc>
+    <loc>https://eko.red/tags/centro-de-investigaciones-populares</loc>
   </url>
 
   <url>
@@ -291,7 +291,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/crimen-organizado</loc>
+    <loc>https://eko.red/tags/cultura</loc>
   </url>
 
   <url>
@@ -299,7 +299,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/cultura</loc>
+    <loc>https://eko.red/tags/crimen-organizado</loc>
   </url>
 
   <url>
@@ -319,11 +319,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/dictaduras</loc>
+    <loc>https://eko.red/tags/economia</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/economia</loc>
+    <loc>https://eko.red/tags/eeuu</loc>
   </url>
 
   <url>
@@ -331,7 +331,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/eeuu</loc>
+    <loc>https://eko.red/tags/dictaduras</loc>
   </url>
 
   <url>
@@ -343,11 +343,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/energiaydignidadhumana</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/eta</loc>
+    <loc>https://eko.red/tags/escritura-creativa</loc>
   </url>
 
   <url>
@@ -355,15 +351,19 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/escritura-creativa</loc>
+    <loc>https://eko.red/tags/eta</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/ficcion</loc>
+    <loc>https://eko.red/tags/energiaydignidadhumana</loc>
   </url>
 
   <url>
     <loc>https://eko.red/tags/farc</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/exploracion</loc>
   </url>
 
   <url>
@@ -375,15 +375,11 @@
   </url>
 
   <url>
+    <loc>https://eko.red/tags/ficcion</loc>
+  </url>
+
+  <url>
     <loc>https://eko.red/tags/finanzas</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/hidroelectrica</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/hezbola</loc>
   </url>
 
   <url>
@@ -391,7 +387,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/hugo-chavez</loc>
+    <loc>https://eko.red/tags/hezbola</loc>
   </url>
 
   <url>
@@ -403,11 +399,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/izquierdas</loc>
+    <loc>https://eko.red/tags/hugo-chavez</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/javier-milei</loc>
+    <loc>https://eko.red/tags/hidroelectrica</loc>
   </url>
 
   <url>
@@ -415,11 +411,23 @@
   </url>
 
   <url>
+    <loc>https://eko.red/tags/internacional</loc>
+  </url>
+
+  <url>
     <loc>https://eko.red/tags/javier-sagastiberri</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/internacional</loc>
+    <loc>https://eko.red/tags/kanaime</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/javier-milei</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/izquierdas</loc>
   </url>
 
   <url>
@@ -427,23 +435,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/literatura</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/literatura-negra</loc>
-  </url>
-
-  <url>
     <loc>https://eko.red/tags/libertaddeexpresion</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/maduro</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/marcos-perez-jimenez</loc>
+    <loc>https://eko.red/tags/literatura</loc>
   </url>
 
   <url>
@@ -451,11 +447,19 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/maria-corina-machado</loc>
+    <loc>https://eko.red/tags/maduro</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/migracion</loc>
+    <loc>https://eko.red/tags/literatura-negra</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/marcos-perez-jimenez</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/maria-corina-machado</loc>
   </url>
 
   <url>
@@ -463,15 +467,7 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/migrantesvenezolanos</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/mundo</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/militares</loc>
+    <loc>https://eko.red/tags/migracion</loc>
   </url>
 
   <url>
@@ -479,7 +475,19 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/nicolas-maduro</loc>
+    <loc>https://eko.red/tags/militares</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/mundo</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/migrantesvenezolanos</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/naturaleza</loc>
   </url>
 
   <url>
@@ -487,7 +495,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/pdvsa</loc>
+    <loc>https://eko.red/tags/nicolas-maduro</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/ransomware</loc>
   </url>
 
   <url>
@@ -499,11 +511,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/ransomware</loc>
+    <loc>https://eko.red/tags/resena-literaria</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/resena-literaria</loc>
+    <loc>https://eko.red/tags/rodriguez</loc>
   </url>
 
   <url>
@@ -511,11 +523,11 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/rusia</loc>
+    <loc>https://eko.red/tags/pdvsa</loc>
   </url>
 
   <url>
-    <loc>https://eko.red/tags/rodriguez</loc>
+    <loc>https://eko.red/tags/rusia</loc>
   </url>
 
   <url>
@@ -535,19 +547,19 @@
   </url>
 
   <url>
-    <loc>https://eko.red/tags/ucrania</loc>
-  </url>
-
-  <url>
-    <loc>https://eko.red/tags/venezolanosporelmundo</loc>
-  </url>
-
-  <url>
     <loc>https://eko.red/tags/transicion-politica</loc>
   </url>
 
   <url>
+    <loc>https://eko.red/tags/ucrania</loc>
+  </url>
+
+  <url>
     <loc>https://eko.red/tags/usaid</loc>
+  </url>
+
+  <url>
+    <loc>https://eko.red/tags/venezolanosporelmundo</loc>
   </url>
 
   <url>
